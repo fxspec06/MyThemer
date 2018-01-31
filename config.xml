@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets"
+xmlns:rim="http://www.blackberry.com/ns/widgets"
+version="0.0.1" rim:header="Neo">
+
+	<name>Neo</name>
+	<description>The world's first fully customizable twitter client! </description>
+	<author href="http://www.twitter.com/neo_webos" rim:copyright="Copyright 2012 fxspec06">Bryan Leasot</author>
+	<authorId>gYAAgKZPH4Kcm5GhYLhMlDC6oIM</authorId>
+	<feature id="blackberry.invoke" required="true" version="1.0.0" />
+	<feature id="blackberry.invoke.BrowserArguments" required="true" version="1.0.0" />
+    <feature id="blackberry.invoke.MessageArguments" required="true" version="1.0.0" />
+	<icon src="icon_86.png" />
+	<rim:loadingScreen backgroundImage="bbsplash.png" />
+	<rim:background backgroundImage="bbsplash.png" />
+	<content src="debug.html" />
+	<rim:orientation mode="landscape" />
+</widget>

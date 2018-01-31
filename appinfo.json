@@ -1,0 +1,12 @@
+{
+	"title": 	  "Neo Demo",
+	"id": 		  "com.fxjm.neo.demo",
+	"version": 	  "0.5.3",
+	"vendor": 	  "FXJMApps",
+	"vendor_email": "fxjmapps@gmail.com",
+	"vendor_url": "http://twitter.com/Neo_webOS",
+	"type": 	  "web",
+	"main": 	  "index.html",
+	"icon": 	  "_icon.png",
+	"uiRevision": "2"
+}

@@ -1,0 +1,24 @@
+
+
+add media previews for images in timeline and drilldown
+
+fix column switch black screen
+must fix bug is coming back to the timeline from something else and the screen is blank 
+
+fix list savecolumndata and savetweetdata functions
+
+
+auto update cache on got tweets
+
+
+fix image uploader
+
+phone back gesture
+
+i want to take all these themes i've built and hard code them into some presets.......
+btw where is @kesne on that too? thought he made some 
+
+add 3rd pane
+
+i'm thinking a little "simple vs advanced" themes section will suffice..... via radio button...... 
+then a primary color, secondary color selection, along w/ a FEW effects and a name save.. 
