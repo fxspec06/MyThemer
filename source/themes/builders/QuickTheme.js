@@ -342,8 +342,10 @@ enyo.kind({
     finish: function() {
     	window.saving = {};
     	//this.x.destroy();
-    	this.spinner(false);
-    	this.exit();
+	this.spinner(false);
+	App.Prefs.set("wasTheming", true);
+	location.reload();
+    	//this.exit();
     },
 	exit: function(s, e) {
 		this.bubbleUp('destroyBox', e);
