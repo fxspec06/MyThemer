@@ -463,7 +463,8 @@ resetApp = function() {
 	//@* UES THIS TO REFRESH PAGE AFTER APPLYING THEME
 	App.Prefs.set("wasTheming", true);
 	setTimeout(function(){
-		document.location.reload();
+		//document.location.reload();
+		history.go(0);
 	}.bind(this), 1000);
 	return;
 
