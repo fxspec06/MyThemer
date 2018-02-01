@@ -252,9 +252,9 @@ enyo.kind({
 			classes: ''
 		},
 
-		black: 
-			{"styles":{"textColor":"rgba(0,170,170,1)"},"highlight":{"backgroundColor":"rgba(170,  170,  170, 1)","textColor":"rgba(0,  0,  0, 1)","textSize":"","textWeight":"","letterSpacing":"","textTransform":"","borderLeftSize":"","borderRightSize":"","borderLeftColor":"rgba(68,  68,  68, 1)","borderRightColor":"rgba(68,  68,  68, 1)","borderTopSize":"","borderBottomSize":"","borderTopColor":"rgba(68,  68,  68, 1)","borderBottomColor":"rgba(68,  68,  68, 1)"}}
-		,
+		Large: {
+			"styles":{"width":"236px","backgroundColor":"rgba(122, 24, 24, 1)","textColor":"rgba(31, 37, 84, 1)","textSize":"29px","textWeight":"900","letterSpacing":"-3px","textTransform":"","borderLeftSize":"0px","borderRightSize":"0px","borderLeftColor":"rgba(255, 255, 129, 1)","borderRightColor":"rgba(255, 255, 129, 1)","borderTopSize":"0px","borderBottomSize":"0px","borderTopColor":"","borderBottomColor":"rgba(255, 255, 129, 1)"},"highlight":{"backgroundColor":"rgb(31,37,57)","textColor":"rgb(255,252,255)","textSize":"37px","textWeight":"900","letterSpacing":"-2px","textTransform":"","borderLeftSize":"0px","borderRightSize":"0px","borderLeftColor":"rgba(255, 255, 129, 1)","borderRightColor":"rgba(255, 255, 129, 1)","borderTopSize":"","borderBottomSize":"","borderTopColor":"rgb(255,255,254)","borderBottomColor":"rgb(255,255,255)"}
+		},
 
 
 		onyx: {

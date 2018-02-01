@@ -190,7 +190,9 @@ enyo.kind({
 			},
 			highlight: {}
 		},
-		black: {"styles":{"layout":"official","backgroundColor":"rgba(0,  0,  0, 1)","textColor":"rgba(170,  170,  170, 1)","textSize":"","textWeight":"","letterSpacing":"","textTransform":"","borderLeftSize":"","borderRightSize":"","borderLeftColor":"rgba(68,  68,  68, 1)","borderRightColor":"rgba(68,  68,  68, 1)","borderTopSize":"","borderBottomSize":"","borderTopColor":"rgba(68,  68,  68, 1)","borderBottomColor":"rgba(68,  68,  68, 1)","padding":"","margin":""},"highlight":{"textColor":"rgba(68,  68,  68, 1)","textSize":"","textWeight":"","letterSpacing":"","textTransform":""}}
-		
+		'red and yellow': {
+			"styles":{"layout":"neo","backgroundColor":"rgba(122, 24, 24, 1)","textColor":"rgba(31, 37, 84, 1)","textSize":"20px","textWeight":"0","letterSpacing":"-2px","textTransform":"","borderLeftSize":"0px","borderRightSize":"0px","borderLeftColor":"rgba(255, 255, 129, 1)","borderRightColor":"rgba(255, 255, 129, 1)","borderTopSize":"0px","borderBottomSize":"7px","borderTopColor":"rgba(255, 255, 129, 1)","borderBottomColor":"rgba(255, 255, 129, 1)","padding":"0px","margin":"0px"},"highlight":{"textColor":"rgba(255, 255, 129, 1)","textSize":"14px","textWeight":"0","letterSpacing":"-1px","textTransform":""}
+		} 
+
 	}
 });

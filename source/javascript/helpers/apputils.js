@@ -163,8 +163,9 @@ AppUtils.sendEmail = function(opts) {
 	email_srvc.response(function(inResponse){
 		enyo.log("email service response...", enyo.json.stringify(inResponse));
 	});*/
+	//console.error(email_params)
 	for (var i = 0; i < email_params.recipients.length; i++) {
-		var mailtostring = 'mailto:' + email_params.recipients[i].address + '?Subject=' + email_params.summary + '&body=' + email_params.text;
+		var mailtostring = 'mailto:' + email_params.recipients[i].value + '?Subject=' + email_params.summary + '&body=' + email_params.text;
 		console.log(mailtostring);
 		location = mailtostring;
 	}

@@ -243,20 +243,21 @@ enyo.kind({
 		);
 
 		var body = this.type + ':%0D%0A%0D%0A' + jsonstring + '%0D%0A%0D%0A';
-
-		var mailtostring = 'mailto:?Subject=My%20Neo%20theme:%20' + this.themeName +'&body=' + this.type + ':%0D%0A%0D%0A' + jsonstring + '%0D%0A%0D%0A';
 		var address = 'bshado@charter.net';
 		var subject = 'My Neo theme: ' + this.themeName;
 
 		AppUtils.sendEmail({
-			to: [{name: 'Neo', address: address}],
+			to: [{
+				name: 'Neo',
+				address: address
+			}],
 			subject: subject,
 			msg: body
 		});
 
 
 		//console.log(mailtostring);
-		location = mailtostring;
+		//location = mailtostring;
 	},
 	//@* event
 	//@* preset tapped
