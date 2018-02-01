@@ -254,10 +254,6 @@ enyo.kind({
 			subject: subject,
 			msg: body
 		});
-
-
-		//console.log(mailtostring);
-		//location = mailtostring;
 	},
 	//@* event
 	//@* preset tapped

@@ -155,7 +155,10 @@ enyo.kind({
 		this.owner.sample = true;
 		//this.log('SAVING.............', sg.theme.type, window.saving, this.type);
 		if (window.saving[this.getType()] != null) {
-			setTimeout((function(){delete this.owner.sample}).bind(this), 4000, this);
+			if (this.owner != null && this.owner != 'undefined') {
+				setTimeout((function(){delete this.owner.sample}).bind(this), /*400*/0, this);
+				//delete this.owner.sample;
+			}
 			return;
 		}
 		window.saving[this.getType()] = true;
@@ -169,7 +172,8 @@ enyo.kind({
 		this.setHighlight(/*enyo.mixin(this.getDefaults().highlight, */_cstm.highlight/*)*/);
 		this.saveTheme();
 		this.saveCustom(_cstm);
-		enyo.Signals.send('loadTheme', {type: this.getType(), theme: _cstm.name});
+		//enyo.Signals.send('loadTheme', {type: this.getType(), theme: _cstm.name});
+		resetApp();
 	},
 	stripNull: function(object) {
 		for (var key in object) {
@@ -509,7 +513,7 @@ enyo.kind({
 		sidebarItem: {
 			//@* public
 			defaultTheme: 'murky',
-			themes: ['neo', 'aqua', 'murky', 'Large', 'onyx'],
+			themes: ['neo', 'aqua', 'murky', 'Large', 'green', 'onyx'],
 			//@* protected
 			styles: {
 				width: '',

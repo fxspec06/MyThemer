@@ -164,12 +164,12 @@ enyo.kind({
 			
 			this.$.body.setContent(body);
 			
-			console.log(urls);
+			//console.log(urls);
 			
 			var self = this;
 			if (urls) 
 				for (var i in urls) {
-					console.log(urls[i]);
+					//console.log(urls[i]);
 					shurl.expand(urls[i], {
 						'onSuccess': enyo.bind(this, function(data) {
 							body = shurl.replaceExpandableURL(body, data.shorturl, data.longurl);
@@ -185,19 +185,19 @@ enyo.kind({
 	//@* public
 	//@* generates media previews for the tweet
 	buildMediaPreviews: function() {
-		this.log(this.$.body.getContent())
+		//this.log(this.$.body.getContent())
 		var self = this,
 			siu = new SpazImageURL(),
 			imageThumbUrls = siu.getThumbsForUrls(this.$.body.getContent()),
 			imageFullUrls = siu.getImagesForUrls(this.$.body.getContent()),
 			i = 0;
 		
-		this.log(imageThumbUrls);
+		//this.log(imageThumbUrls);
 		
 		this.imageFullUrls = [];
 		
 		if (imageThumbUrls) {
-			this.log('images found... loading images...')
+			//this.log('images found... loading images...')
 			for (var imageUrl in imageThumbUrls) {
 				var imageComponent = this.$.images.createComponent({
 					kind: "Image",

@@ -21,6 +21,10 @@ body, input, button, .neo {
 	overflow: hidden;
 }
 
+.neo-sidebar-item {
+	min-width: 175px
+}
+
 .invalid {
 	color: red !important;
 	text-decoration:line-through;

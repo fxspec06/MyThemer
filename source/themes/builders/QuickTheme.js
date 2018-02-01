@@ -33,7 +33,7 @@ enyo.kind({
 		{kind: 'Neo.Toolbar', header: 'Quick Theme', left: [
 			{name: 'exit', kind: 'Neo.Button', ontap: 'exit', icon: 'exit', blue: false, style: 'color: red !important;'} 
 		], right: [
-			{kind: 'Neo.Button', ontap: 'select', text: 'Apply...', blue: false, style: 'color: green !important;'}
+			{kind: 'Neo.Button', ontap: 'apply', text: 'Apply...', blue: false, style: 'color: green !important;'}
 		]},
 		
 		{name: 'widgetBox', kind: 'Scroller', touch: true, fit: true, components: [
@@ -67,9 +67,39 @@ enyo.kind({
 		this.showSelectMessage(true);
 		//this.colorChanged();
 		setTimeout(this.render.bind(this), 0);
+		this.loadQuickThemeColors();
 	},
 	
-	
+	loadQuickThemeColors: function() {
+		var colors = App.Prefs.get('neo-quicktheme-colors');
+		if (!colors) {
+			colors = ["#00", "#CC", "#FF"];
+			App.Prefs.set('neo-quicktheme-colors', colors);
+		};
+		
+		//console.log("quicktheme colors: " + App.Prefs.get('neo-quicktheme-colors'));
+
+		this.setPrimary(colors[0]);
+		this.setSecondary(colors[1]);
+		this.setAlternate(colors[2]);
+
+		this.saveColors(colors);
+	},
+
+	saveColors: function(colors) {
+		if (!colors) colors = ["#00", "#CC", "#FF"];
+		App.Prefs.set('neo-quicktheme-colors', colors);
+	},
+
+	primaryChanged: function(e) {
+		this.$.primary.setColor(this.primary);
+	},
+	secondaryChanged: function(e) {
+		this.$.secondary.setColor(this.secondary);
+	},
+	alternateChanged: function(e) {
+		this.$.alternate.setColor(this.alternate);
+	},
 	
 	//@* the
 	//@* function.
@@ -263,7 +293,7 @@ enyo.kind({
 			setTimeout((function(type, params){
 				this.log('loading...', type, params);
 				enyo.Signals.send('saveQuickTheme', enyo.clone(params));
-			}).bind(this), 1000 * i, type, params);
+			}).bind(this), 100 * i, type, params);
 			i++;
 		}
 		this.log('SUCCESS!!!!!!!!!!!!!!!');
@@ -317,6 +347,8 @@ enyo.kind({
 		this.log('COLOR SELECTED: ', color);
 		this.$[this.current].setColor(color);
 		this[this.current] = color;
+
+		this.saveColors([this.primary, this.secondary, this.alternate]);
 	},
 	save: function(current) {
 		if (!this.current || this.current == '') return;
@@ -324,12 +356,12 @@ enyo.kind({
 		this.log('saving...', current, color = this.$[this.current].getColor());
 		this[current] = color;
 	},
-	select: function() {
+	apply: function() {
 		var colors = [this.primary, this.secondary, this.alternate];
 		this.log(colors);
 		this.quickTheme(colors);
 		this.spinner(true);
-		setTimeout(this.finish.bind(this), 7300); // 10 second delay to load
+		setTimeout(this.finish.bind(this), 2000); // 10 second delay to load
 	},
     spinner: function(onoff) {
     	//this.log(onoff ? 'showing' : 'hiding');
@@ -343,8 +375,9 @@ enyo.kind({
     	window.saving = {};
     	//this.x.destroy();
 	this.spinner(false);
-	App.Prefs.set("wasTheming", true);
-	location.reload();
+
+	resetApp();
+
     	//this.exit();
     },
 	exit: function(s, e) {

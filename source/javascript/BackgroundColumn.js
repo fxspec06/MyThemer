@@ -256,7 +256,7 @@ enyo.kind({
 	
 	//@* add a user to app autocomplete
 	addToAC: function(username) {
-		if (!window.autocomplete) return console.error('NO AUTOCOMPLETE...');
+		if (!window.autocomplete) return;// console.error('NO AUTOCOMPLETE...');
 		var userExists = enyo.indexOf(username, window.autocomplete);
 		if (userExists == -1) window.autocomplete.push(username);
 	},
