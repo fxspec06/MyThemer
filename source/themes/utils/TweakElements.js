@@ -214,19 +214,21 @@ enyo.kind({
 	//@* save button tapped
 	//@* saves the current theme if valid
 	save: function(s, e) {
-		this.spinner(true);
+		
 		var _th = this.getPrepared(),
 			//_n = this.$.nameInput.getValue();
 			_n = this.themeName;
 
-		if (!_n || !this.validTheme) return;
+		if (!_n || !this.validTheme) {
+			alert("Please enter a valid theme name.", this);
+			return;
+		}
+		this.spinner(true);
 		_th.name = _n;
 		this.log(copy(_th));
 		enyo.Signals.send('saveToThemesList', {theme: copy(_th)});
-		
-		
-		//@* try ME 
-		this.load(s, e);
+		this.load(s, e);		
+	
 		//this.reset();
 	},
 	//@* event

@@ -103,7 +103,8 @@ enyo.kind({
 		if (this.isPreview()) return this.preview(this.owner.themePreview);
 		try {
 		    var _svd = this._load();
-	   }catch(e) { _svd = {}}
+	   	} catch(e) { _svd = {} }
+		
 		if (_svd && _svd.name) this.loadTheme(_svd.name);
 			else if (!_svd || !_svd.name) {
 				this.loadTheme(this.getStatics().defaultTheme);
@@ -198,7 +199,7 @@ enyo.kind({
 		this.setHighlight(_cstm.highlight);
 		this.saveTheme();
 		this.saveCustom(_cstm);
-		if (!theme.override) enyo.Signals.send('loadTheme', {type: this.getType(), theme: 'saved'});
+		if (!theme.override) enyo.Signals.send('loadTheme', {type: this.getType(), theme: theme.name});
 		//else enyo.Signals.send('loadTheme', {type: this.type, theme: sg.theme.name});
 	},
 	//@* private

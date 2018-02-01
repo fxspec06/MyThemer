@@ -293,7 +293,7 @@ enyo.kind({
 			setTimeout((function(type, params){
 				this.log('loading...', type, params);
 				enyo.Signals.send('saveQuickTheme', enyo.clone(params));
-			}).bind(this), 100 * i, type, params);
+			}).bind(this), 1000 * i, type, params);
 			i++;
 		}
 		this.log('SUCCESS!!!!!!!!!!!!!!!');
@@ -374,8 +374,7 @@ enyo.kind({
     },
     finish: function() {
     	window.saving = {};
-    	//this.x.destroy();
-	this.spinner(false);
+	//this.spinner(false);
 
 	resetApp();
 

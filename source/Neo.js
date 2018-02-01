@@ -88,15 +88,64 @@ enyo.kind({
 		//@* done
 		this.reflow();
 		
-		
-		
 		////////
 		//setTimeout(function(){AppUI.userChange(null);}, 1000);
 		if (App.Prefs.get("wasTheming")) {
 			AppUI.showMore("themes");
 			App.Prefs.set("wasTheming", false);
 		}
+
+
+
+		setTimeout(function() {
+			var toBG = this.$.sidebar.$.list.children[0].$.item.$.themer.styles.backgroundColor;
+			console.error(toBG);
+			var sidebarBG = this.darkLight(toBG);
+			this.$.sidebar.applyStyle('background-color', sidebarBG);
+			
+			//console.error(this.$.container.$.timeline.children[0].$.item.$.themer);
+			toBG = this.$.container.$.timeline.children[0].$.item.$.themer.styles.backgroundColor;
+			var containerBG = this.darkLight(toBG);
+			this.$.container.applyStyle('background-color',  containerBG);
+		}.bind(this), 1000)
 	},
+	darkLight: function(color) {
+		//setTimeout(function(){
+			if (color.indexOf('(') == -1) color = getRGB(color);
+			console.error(color);
+		
+
+			var RGB = color.substring(color.indexOf('(')+1, color.indexOf(')')).split(',');
+			
+			var red = parseInt(RGB[0]),
+				blue = parseInt(RGB[1]),
+				green = parseInt(RGB[2]);
+
+			console.error(red, blue, green);
+
+			if (red > 128) red -= 50;
+				else red += 50;
+
+			if (blue > 128) blue -= 50;
+				else blue += 50;
+
+			if (green > 128) red -= 50;
+				else green += 50;
+
+			if (red < 0) red = 0;
+				else if (red > 255) red = 255;
+			if (blue < 0) blue = 0;
+				else if (blue > 255) blue = 255;
+			if (green < 0) green = 0;
+				else if (green > 255) green = 255;
+			
+			console.error(red, blue, green);
+
+			return 'rgba(' + red + ',' + blue + ',' + green + ', 1)';
+		//}.bind(this), 0);
+	},
+	
+
 	
 	windowParamsChangeHandler: function(inParams) {
 		AppUtils.showBanner('windowParamsChangeHandler: '+ JSON.stringify(enyo.windowParams));
@@ -244,7 +293,7 @@ enyo.kind({
 			enyo.forEach(this.onRendered, function(_call) {_call.call()}, this);
 		this.setOnRendered([]);
 		this.isRendered = true;
-		return r
+		return r;
 	},
 	
 	
@@ -461,5 +510,5 @@ resetApp = function() {
 	App.Prefs.set("wasTheming", true);
 	setTimeout(function(){
 		location.reload();
-	}.bind(this), 1000);
+	}.bind(this), 7500);
 }

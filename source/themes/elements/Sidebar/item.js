@@ -50,7 +50,7 @@ enyo.kind({
 	updateTheme: function(inSender, styles){
 		this.themeChanged();
 		this.$.themer.stylize(styles, this.$.sidebarItem);
-		
+
 		if (!this.preview && !this.sample) 
 			this.bubble('onSetWidth', {width: parseInt(styles.width) || 344});
 		

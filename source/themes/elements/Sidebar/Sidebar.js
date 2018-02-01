@@ -77,6 +77,7 @@ enyo.kind({
 		
 		this.$.list.setCount(this._side.length);
 		this.$.list.build();
+
 		
 		//@* build the menu
 			this.buildMenu();
@@ -141,6 +142,9 @@ enyo.kind({
 		_$i.setTitle(_mi.name);
 		_$i.selectItem(this.index == _i);
 		_$i.setUnread(this.unread[_i]);
+
+		/*var bgcolor = _$i.$.themer.styles.backgroundColor;
+		this.setBG(bgcolor);*/
 	},
 	
 	//@* private
