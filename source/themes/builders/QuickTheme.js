@@ -76,7 +76,7 @@ enyo.kind({
 			colors = ["#00", "#CC", "#FF"];
 			App.Prefs.set('neo-quicktheme-colors', colors);
 		};
-		
+
 		//console.log("quicktheme colors: " + App.Prefs.get('neo-quicktheme-colors'));
 
 		this.setPrimary(colors[0]);
@@ -361,7 +361,8 @@ enyo.kind({
 		this.log(colors);
 		this.quickTheme(colors);
 		this.spinner(true);
-		setTimeout(this.finish.bind(this), 2000); // 10 second delay to load
+		neoapp.$.cover.show();
+		setTimeout(this.finish.bind(this), 7500); // 10 second delay to load
 	},
     spinner: function(onoff) {
     	//this.log(onoff ? 'showing' : 'hiding');

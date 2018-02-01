@@ -206,6 +206,7 @@ enyo.kind({
 	load: function(s, e) {
 		var _th = this.getPrepared();
 		this.spinner(true);
+		neoapp.$.cover.show();
 		enyo.Signals.send('loadCustom', {theme: copy(_th)});
 		//this.reset();
 	},
@@ -222,7 +223,11 @@ enyo.kind({
 		_th.name = _n;
 		this.log(copy(_th));
 		enyo.Signals.send('saveToThemesList', {theme: copy(_th)});
-		this.reset();
+		
+		
+		//@* try ME 
+		this.load(s, e);
+		//this.reset();
 	},
 	//@* event
 	//@* delete button tapped

@@ -457,21 +457,9 @@ copy = function(o) {
 	return n;
 };
 resetApp = function() {
-
-	neoapp.$.cover.hide();
-
 	//@* UES THIS TO REFRESH PAGE AFTER APPLYING THEME
 	App.Prefs.set("wasTheming", true);
 	setTimeout(function(){
-		//document.location.reload();
-		history.go(0);
+		location.reload();
 	}.bind(this), 1000);
-	return;
-
-	//@* USE THIS TO TRY TO FORCE NEO TO AUTOMATICALLY RELOAD
-	neoapp.destroy();
-	setTimeout(function(){
-		neoapp = new Neo().write();
-	}.bind(this), 1000);
-	
 }
