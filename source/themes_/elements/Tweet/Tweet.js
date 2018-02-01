@@ -180,11 +180,10 @@ enyo.kind({
 					});
 				}
 			else this.buildMediaPreviews();
-			
 	},
 	//@* public
 	//@* generates media previews for the tweet
-	buildMediaPreviews: function() {
+	buildMediaPreviews: function() {return;
 		this.log(this.$.body.getContent())
 		var self = this,
 			siu = new SpazImageURL(),

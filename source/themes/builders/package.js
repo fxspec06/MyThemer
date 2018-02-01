@@ -1,5 +1,6 @@
 enyo.depends(
-	'Color.js',
+	'QuickTheme.js',
+	'ColorSquare.js',
 	'Size.js',
-	'ColorBuilder.js'
+	'QuickTheme.css'
 );

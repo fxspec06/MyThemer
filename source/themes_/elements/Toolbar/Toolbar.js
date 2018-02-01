@@ -203,7 +203,7 @@ enyo.kind({
 			if (event.originator.container[contains]) return event.originator.container[contains];
 			if (event.originator.container.container[contains]) return event.originator.container.container[contains];
 		}catch(e){}
-		this.log(event, contains);
+		//this.log(event, contains);
 		return false;
 	},
 	

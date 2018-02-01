@@ -1,5 +1,5 @@
 enyo.kind({
-	name: 'Neo.TweakElements',
+	name: 'Neo.Themes_advanced',
 	classes: 'neo-themes',
 	layoutKind: 'FittableRowsLayout',
 	style: '',
@@ -24,10 +24,6 @@ enyo.kind({
 	
 	components: [
 		{name: 'signals', kind: 'Signals', customize: 'customize'},
-		{name: 'toptool', kind: 'Neo.Toolbar', header: 'Tweak Elements', onClose: 'close', closeable: true, right: [
-			{name: 'caption', classes: 'neo-themes-caption', content: 'Change everything. Again.'}
-		]},
-		{name: 'spinner', kind: 'Neo.Spinner', fit: true, showing: false},
 		{name: 'themer', kind: 'Panels', fit: true, index: 0, draggable: false, components: [
 			{name: 'sampler', kind: 'Scroller', thumb: false, classes: 'enyo-fit',
 				touch: true, horizontal:'hidden', components: [
@@ -149,9 +145,7 @@ enyo.kind({
 	
 	//@* private
 	//@* from signals
-	//@* FIXME SUPER LONG TIME TO DO THIS
 	customize: function(s, sg) {
-		this.spinner(true);
 		this.$.back.show();
 		this.element = copy(sg.element);
 		if (!this.element.highlight) this.element.highlight = {}
@@ -168,16 +162,10 @@ enyo.kind({
 		var presets = [],
 			_t = this.element.themes.concat(['custom']);
 		for (var el in _t) presets.push({preview: true, themePreview: _t[el], type: this.type});
-		presets[presets.length - 1].last = true;
-		
-		
-		setTimeout(enyo.bind(this, function(){
-			this.presets = copy(presets);
-			this.$.presets.setCount(presets.length);
-			this.$.presets.build();
-		}), 100);
+		this.presets = copy(presets);
+		this.$.presets.setCount(presets.length);
+		this.$.presets.build();
 	},
-	//FIXME SUPER LONG. WAY LONG.
 	
 	
 	
@@ -216,7 +204,6 @@ enyo.kind({
 	//@* loads the current theme into the app, then closes themes
 	load: function(s, e) {
 		var _th = this.getPrepared();
-		this.spinner(true);
 		enyo.Signals.send('loadCustom', {theme: copy(_th)});
 		this.reset();
 	},
@@ -224,7 +211,6 @@ enyo.kind({
 	//@* save button tapped
 	//@* saves the current theme if valid
 	save: function(s, e) {
-		this.spinner(true);
 		var _th = this.getPrepared(),
 			_n = this.$.nameInput.getValue();
 		if (!_n || !this.validTheme) return;
@@ -237,7 +223,6 @@ enyo.kind({
 	//@* delete button tapped
 	//@* deletes the current theme
 	deleteTheme: function(s, e) {
-		this.spinner(true);
 		enyo.Signals.send('deleteTheme', {type: this.type, theme: this.themeName,
 			callback: function(deleted) {if (deleted) this.reset()}.bind(this)});
 	},
@@ -255,7 +240,6 @@ enyo.kind({
 	//@* preset tapped
 	//@* loads the current theme for that preset and resets themes
 	choosePreset: function(s, e) {
-		this.spinner(true);
 		enyo.Signals.send('loadTheme', {type: this.type, theme: e.selected.value});
 		this.reset();
 	},
@@ -340,7 +324,7 @@ enyo.kind({
 			case 'custom': break;
 			case 'transparent': break;
 			default:
-				var RGB = getRGB(_v),
+				var RGB = this.getRGB(_v),
 					_cs = RGB.match(/\d+/g);
 				if (_cs == null) _cs = [0,0,0];
 				_preset.$.builderRedSlider.setValue(_cs[0]);
@@ -371,14 +355,12 @@ enyo.kind({
 			_orig.render();
 		}, this);
 		e.item.$.preset.render();
-		if (_p.last) this.spinner(false);
 	},
 	//@* private
 	//@* on preset tapped
 	//@* we want to build a new theme based on this preset type
 	presetTap: function(s, e) {
 		this.log();
-		this.spinner(true);
 		var showItems = ['save', 'load', 'email', 'builderBox'],
 			_ch = s.children[0],
 			_i = e.index,
@@ -403,17 +385,14 @@ enyo.kind({
 			this.setThemeName(_t);
 			this.$.deleteTheme.show();
 		}
-		setTimeout(enyo.bind(this, function(){
-			var _cmps = this.getPreview(50, this.type, _t, false);
-			this.$.livePreview.destroyClientControls();
-			this.$.livePreview.createComponents(_cmps, {owner: this});
-			this.$.livePreview.render();
-			this.$.builder.setCount(this.customizer.master.length);
-			this.$.builder.build();
-			this.render();
-			this.reflow();
-		}), 100);
-		
+		var _cmps = this.getPreview(50, this.type, _t, false);
+		this.$.livePreview.destroyClientControls();
+		this.$.livePreview.createComponents(_cmps, {owner: this});
+		this.$.livePreview.render();
+		this.$.builder.setCount(this.customizer.master.length);
+		this.$.builder.build();
+		this.render();
+		this.reflow();
 	},
 	//@* private
 	//@* customizer setup item
@@ -462,7 +441,7 @@ enyo.kind({
 				var _cs = _val.match(/\d+/g),
 					_cmps = [];
 				if (_cs == null) {
-					_cs = getRGB(_val).match(/\d+/g);
+					_cs = this.getRGB(_val).match(/\d+/g);
 					if (_cs == null) _cs = [0,0,0];
 				}
 				_cmzr.builderRedSlider.setValue(_cs[0]);
@@ -483,11 +462,8 @@ enyo.kind({
 		}
 		if (_key.toLowerCase().search('background') != -1) _cmzr.builderPattern.show();
 		
-		if (_i == this.customizer.master.length - 1) {
+		if (_i == this.customizer.master.length - 1)
 			this.updatePreview();
-			this.spinner(false);
-		}
-			
 		//@* this is the SLOW loop
 	},
 	
@@ -614,7 +590,17 @@ enyo.kind({
 
 	
 	
-	
+	//@* public
+	//@* gets the RGB value of a color by name, hex, or any other means
+	getRGB: function(color) {
+		var rgb = '',
+			probe = this.createComponent({tag:'div',style:'color:' + color + ';'},{owner:this});
+		probe.render();
+		rgb = probe.getComputedStyleValue('color');
+		this.log(rgb);
+		probe.destroy();
+		return rgb;
+	},
 	
 	//@* private
 	//@* gets slider min and max values for a style
@@ -679,7 +665,6 @@ enyo.kind({
 		this.$.tweetLarge.setTweet(largeTweet);
 		this.$.sidebarHighlight.selectItem(true);
 		enyo.Signals.send('setFullscreen', true);
-		this.spinner(false);
 	},
 	//@* private
     //@* returns new instance of custom themes object
@@ -691,12 +676,4 @@ enyo.kind({
         c = enyo.clone(c);
         return c;
     },
-    spinner: function(onoff) {
-    	this.log(onoff ? 'showing' : 'hiding');
-    	//this.$.spinner[onoff ? 'start' : 'stop']();
-    	this.$.spinner.setShowing(onoff);
-    	this.$.themer.setShowing(!onoff);
-    	this.reflow();
-    	this.render();
-    }
 });

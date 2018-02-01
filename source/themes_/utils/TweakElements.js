@@ -1,3 +1,4 @@
+//function mixin(a,b,c){for(c in b)b.hasOwnProperty(c)&&((typeof a[c])[0]=='o'?mixin(a[c],b[c]):a[c]=b[c]);return a}
 enyo.kind({
 	name: 'Neo.TweakElements',
 	classes: 'neo-themes',
@@ -9,7 +10,7 @@ enyo.kind({
 		onClose: ''
 	},
 	
-	colors: ['custom', 'transparent', 'aliceblue', 'antiquewhite', 'aqua', 'aquamarine', 'azure', 'beige', 'bisque', 'black', 'blanchedalmond', 'blue', 'blueviolet', 'brown', 'burlywood', 'cadetblue', 'chartreuse', 'chocolate', 'coral', 'cornflowerblue', 'cornsilk', 'crimson', 'cyan', 'darkblue', 'darkcyan', 'darkgoldenrod', 'darkgray', 'darkgreen', 'darkkhaki', 'darkmagenta', 'darkolivegreen', 'darkorange', 'darkorchid', 'darkred', 'darksalmon', 'darkseagreen', 'darkslateblue', 'darkslategray', 'darkturquoise', 'darkviolet', 'deeppink', 'deepskyblue', 'dimgray', 'dodgerblue', 'firebrick', 'floralwhite', 'forestgreen', 'fuchsia', 'gainsboro', 'ghostwhite', 'gold', 'goldenrod', 'gray', 'green', 'greenyellow', 'honeydew', 'hotpink', 'indianred', 'indigo', 'ivory', 'khaki', 'lavender', 'lavenderblush', 'lawngreen', 'lemonchiffon', 'lightblue', 'lightcoral', 'lightcyan', 'lightgoldenrodyellow', 'lightgreen', 'lightgrey', 'lightpink', 'lightsalmon', 'lightseagreen', 'lightskyblue', 'lightslategray', 'lightsteelblue', 'lightyellow', 'lime', 'limegreen', 'linen', 'magenta', 'maroon', 'mediumaquamarine', 'mediumblue', 'mediumorchid', 'mediumpurple', 'mediumseagreen', 'mediumslateblue', 'mediumspringgreen', 'mediumturquoise', 'mediumvioletred', 'midnightblue', 'mintcream', 'mistyrose', 'moccasin', 'navajowhite', 'navy', 'oldlace', 'olive', 'olivedrab', 'orange', 'orangered', 'orchid', 'palegoldenrod', 'palegreen', 'palevioletred', 'papayawhip', 'peachpuff', 'peru', 'pink', 'plum', 'powderblue', 'purple', 'red', 'rosybrown', 'royalblue', 'saddlebrown', 'salmon', 'sandybrown', 'seagreen', 'seashell', 'sienna', 'silver', 'skyblue', 'slateblue', 'slategray', 'snow', 'springgreen', 'steelblue', 'tan', 'teal', 'thistle', 'tomato', 'turquoise', 'violet', 'wheat', 'white', 'whitesmoke', 'yellow', 'yellowgreen', 'yellowgreen'],
+	
 	
 	published: {
 		themeName: '',
@@ -19,7 +20,9 @@ enyo.kind({
 		element: '',
 		themes: {},
 		presets: [],
-		preset: ''
+		preset: '',
+		
+		colors: ['custom', 'transparent', 'aliceblue', 'antiquewhite', 'aqua', 'aquamarine', 'azure', 'beige', 'bisque', 'black', 'blanchedalmond', 'blue', 'blueviolet', 'brown', 'burlywood', 'cadetblue', 'chartreuse', 'chocolate', 'coral', 'cornflowerblue', 'cornsilk', 'crimson', 'cyan', 'darkblue', 'darkcyan', 'darkgoldenrod', 'darkgray', 'darkgreen', 'darkkhaki', 'darkmagenta', 'darkolivegreen', 'darkorange', 'darkorchid', 'darkred', 'darksalmon', 'darkseagreen', 'darkslateblue', 'darkslategray', 'darkturquoise', 'darkviolet', 'deeppink', 'deepskyblue', 'dimgray', 'dodgerblue', 'firebrick', 'floralwhite', 'forestgreen', 'fuchsia', 'gainsboro', 'ghostwhite', 'gold', 'goldenrod', 'gray', 'green', 'greenyellow', 'honeydew', 'hotpink', 'indianred', 'indigo', 'ivory', 'khaki', 'lavender', 'lavenderblush', 'lawngreen', 'lemonchiffon', 'lightblue', 'lightcoral', 'lightcyan', 'lightgoldenrodyellow', 'lightgreen', 'lightgrey', 'lightpink', 'lightsalmon', 'lightseagreen', 'lightskyblue', 'lightslategray', 'lightsteelblue', 'lightyellow', 'lime', 'limegreen', 'linen', 'magenta', 'maroon', 'mediumaquamarine', 'mediumblue', 'mediumorchid', 'mediumpurple', 'mediumseagreen', 'mediumslateblue', 'mediumspringgreen', 'mediumturquoise', 'mediumvioletred', 'midnightblue', 'mintcream', 'mistyrose', 'moccasin', 'navajowhite', 'navy', 'oldlace', 'olive', 'olivedrab', 'orange', 'orangered', 'orchid', 'palegoldenrod', 'palegreen', 'palevioletred', 'papayawhip', 'peachpuff', 'peru', 'pink', 'plum', 'powderblue', 'purple', 'red', 'rosybrown', 'royalblue', 'saddlebrown', 'salmon', 'sandybrown', 'seagreen', 'seashell', 'sienna', 'silver', 'skyblue', 'slateblue', 'slategray', 'snow', 'springgreen', 'steelblue', 'tan', 'teal', 'thistle', 'tomato', 'turquoise', 'violet', 'wheat', 'white', 'whitesmoke', 'yellow', 'yellowgreen', 'yellowgreen'],
 	},
 	
 	components: [
@@ -65,30 +68,18 @@ enyo.kind({
 									oninput: 'keypress'},
 							]}
 						]},
-						{name: 'builder', kind: 'Repeater', onSetupItem: 'setupCustomizer', components: [
-							{name: 'title', classes: 'onyx-groupbox-header'},
-							{style: 'max-width: 300px; text-align: center; margin: auto; border: none;', classes: 'onyx-groupbox', components: [
+						{name: 'builder', kind: 'Repeater', onSetupItem: 'setupCustomizer', onUpdate: 'updateBuilder', components: [
+							{name: 'title', classes: 'onyx-groupbox-header', ontap: 'toggleDrawer'},
+							{name: 'drawer', kind: 'onyx.Drawer', style: 'max-width: 300px; text-align: center; margin: auto; border: none;', classes: 'onyx-groupbox', components: [
 								{name: 'builderPopup', showing: false, kind: 'onyx.PickerDecorator', components: [
 									{kind: 'onyx.PickerButton'},
 									{name: 'builderPopupList', kind: 'Neo.PopupList'}
 								]},
-								{name: 'builderColor', showing: false, components: [
-									{content: 'Red', classes: 'onyx-groupbox-header'},
-									{name: 'builderRedSlider', onChange: 'sliding', onChanging: 'sliding', kind: 'onyx.Slider', min:0,max:255},
-									{content: 'Green', classes: 'onyx-groupbox-header'},
-									{name: 'builderGreenSlider', onChange: 'sliding', onChanging: 'sliding', kind: 'onyx.Slider', min:0,max:255},
-									{content: 'Blue', classes: 'onyx-groupbox-header'},
-									{name: 'builderBlueSlider', onChange: 'sliding', onChanging: 'sliding', kind: 'onyx.Slider', min:0,max:255},
-									
-									{kind: 'onyx.PickerDecorator', components: [
-										{kind: 'onyx.PickerButton'},
-										{name: 'builderColorPicker', kind: 'Neo.PopupList', onSelect: 'pickColor'}
-									]}
-								]},
+								{name: 'builderColor', kind: 'Neo.ColorBuilder', showing: false},
 								{name: 'builderPattern', showing: false, components: [
 									{content: 'Pattern', classes: 'onyx-groupbox-header'},
 									//{name: 'builderPatternPreview', kind: 'fx.Fader', showing: false, style: 'height: 100px; width: 100px;'},
-									{content: 'Opacity', classes: 'onyx-groupbox-header'},
+									
 									{name: 'builderPatternOpacitySlider', onChange: 'sliding', onChanging: 'sliding', kind: 'onyx.Slider'}
 								]},
 								{name: 'builderSize', showing: false, components: [
@@ -124,7 +115,10 @@ enyo.kind({
  		
  		
  	},
- 	
+ 	toggleDrawer: function(s, e) {
+ 		this.togglenext = true;
+ 		this.$.builder.renderRow(e.index);
+ 	},
 
 	//@* published
 	//@* called on setThemeName
@@ -134,55 +128,195 @@ enyo.kind({
 			themeExists = custom[this.themeName];
 		this.$.deleteTheme.setShowing(themeExists);
 		this.$.nameInput.addRemoveClass('validExists', themeExists);
-		for (var exist in this.element.themes)
-			if (this.element.themes[exist].toLowerCase() == this.themeName.toLowerCase()) found = true;
+		for (var exist in this.getElement().themes)
+			if (this.getElement().themes[exist].toLowerCase() == this.getThemeName().toLowerCase()) found = true;
 		this.setValidTheme(!( found && !themeExists ));
 	},
 	//@* published
 	//@* called on setValidTheme
 	validThemeChanged: function(oldVal) {
-		var _v = this.validTheme;
+		var _v = this.getValidTheme();
 		this.log(_v);
 		this.$.nameInput.addRemoveClass('invalid',!_v);
 		this.$.nameInput.addRemoveClass('valid',_v);
 	},
 	
+
+	elementChanged: function(oldValue) {
+		//this.log(copy(this.getElement()), oldValue);
+	},
+	
+	
 	//@* private
 	//@* from signals
 	//@* FIXME SUPER LONG TIME TO DO THIS
 	customize: function(s, sg) {
+		var theme = JSON.parse(sg.theme);
 		this.spinner(true);
 		this.$.back.show();
-		this.element = copy(sg.element);
-		if (!this.element.highlight) this.element.highlight = {}
-		this.type = sg.type;
-		this.themes = enyo.mixin(sg.themes, {custom: {
-			styles: sg.styles,
-			highlight: sg.highlight
-		}});
+		//this.log(copy(theme));
+		this.setElement(theme.element);
+		if (!this.getElement().highlight) this.element.highlight = {};
+		this.setType(theme.type);
+		this.setThemes(enyo.mixin(theme.themes, {custom: {
+			styles: theme.styles,
+			highlight: theme.highlight
+		}}));
 		this.$.themer.setIndex(1);
 		this.$.builderBox.hide();
 		this.$.sampler.hide();
 		this.$.presetBox.show();
 		this.$.customizer.show();
 		var presets = [],
-			_t = this.element.themes.concat(['custom']);
+			_t = this.getElement().themes.concat(['custom']);
 		for (var el in _t) presets.push({preview: true, themePreview: _t[el], type: this.type});
 		presets[presets.length - 1].last = true;
 		
 		
 		setTimeout(enyo.bind(this, function(){
-			this.presets = copy(presets);
+			this.setPresets(presets);
 			this.$.presets.setCount(presets.length);
 			this.$.presets.build();
+			// calls setupPreset
 		}), 100);
 	},
-	//FIXME SUPER LONG. WAY LONG.
-	
-	
-	
-	
-	
+	//@* private
+	//@* preset list setup item
+	//@* called after customize
+	setupPreset: function(s, e) {
+		var _i = e.index,
+			_p = this.getPresets()[_i],
+			_cmps = this.getPreview(_i, this.getType(), _p.themePreview, true);
+		e.item.$.preset.destroyClientControls();
+		e.item.$.preset.createComponents(_cmps);
+		enyo.forEach(e.item.$.preset.children, function(_tc) {
+			var _orig = _tc;
+			if (!_tc.$.themer && _tc.children[1] && _tc.children[1].kind != 'Neo.ThemeFile')
+				_tc = _tc.children[1];
+					else if (!_tc.$.themer) _tc = _orig.children[0];
+			_tc.$.themer.preview(_tc.themePreview);
+			if (_tc.selectItem) _tc.selectItem(_tc.highlighted);
+			_orig.render();
+		}, this);
+		e.item.$.preset.render();
+		if (_p.last) this.spinner(false);
+	},
+	//@* private
+	//@* on preset tapped
+	//@* we want to build a new theme based on this preset type
+	//@* takes a long time ...
+	presetTap: function(s, e) {
+		this.log();
+		this.spinner(true);
+		var showItems = ['save', 'load', 'email', 'builderBox'],
+			_ch = s.children[0],
+			_i = e.index,
+			_t,
+			custom = this.getCustom(),
+			_e = this.getElement();
+		this.log(copy(_e), copy(this.getElement()));
+		if (_ch.name == 'pickerDecorator' && _ch.children[1].showing == true) return;
+		for (var _key in showItems) this.$[showItems[_key]].show();
+		this.$.presetBox.hide();
+		this.setPreset(this.presets[_i]);
+		_t = this.getPreset().themePreview;
+		this.setCustomizer(enyo.mixin({
+			master: [],
+			styles: _e.styles,
+			highlight: _e.highlight
+		}, {
+			highlight: this.getThemes()[_t].highlight,
+			styles: this.getThemes()[_t].styles
+		}));
+		for (var _cmz in this.getCustomizer().styles) this.customizer.master.push(_cmz);
+		for (var _cmz in this.getCustomizer().highlight) this.customizer.master.push('highlight ' + _cmz);
+		if (custom && custom[_t]) {
+			this.$.nameInput.setValue(_t);
+			this.setThemeName(_t);
+			this.$.deleteTheme.show();
+		}
+		setTimeout(enyo.bind(this, function() {
+			var _cmps = this.getPreview(50, this.getType(), _t, false);
+			this.$.livePreview.destroyClientControls();
+			this.$.livePreview.createComponents(_cmps, {owner: this});
+			this.$.livePreview.render();
+			this.$.builder.setCount(this.getCustomizer().master.length);
+			this.$.builder.build();
+			this.render();
+			this.reflow();
+		}), 100);
+	},
+
+	//@* private
+	//@* customizer setup item
+	//@* this is the SLOW loop...
+	setupCustomizer: function(s, e) {
+		var _i = e.index,
+			cmzr = e.item,
+			_cmzr = cmzr.$,
+			foundKey = undefined,
+			presetType = 'Size',
+			mod = '',
+			_val,
+			_key = this.getCustomizer().master[_i],
+			_from = this.getCustomizer().styles,
+			customize;
+		
+		if (typeof _key === undefined) return;
+		
+		if (_key.indexOf('highlight') != -1) {
+			_from = this.getCustomizer().highlight;
+			_key = _key.substr(10);
+		}
+		
+		customize = _from[_key];
+		//@* set the value of our preset to what we found
+			_val = _from[_key];
+		// determine the preset type
+			if (_key.toLowerCase().search('color') != -1) presetType = 'Color';
+			if (_key.toLowerCase().search('layout') != -1) presetType = 'Input';
+		_cmzr.title.setContent(this.type + ' ' + ((_from == this.getCustomizer().highlight) ? 'highlight ' : '') + _key);
+		_cmzr.inputDecorator.show();
+		// set our preset builder up
+		
+		//this.log(_key, _val, _from)
+		switch (presetType) {
+			case 'Size':
+				// also here, we want to set the min and the max for the slider
+				// according to whether it's a margin, padding, letter spacing, or just font size
+				var minMax = this.getMinMax(_key);
+				_cmzr.builderSizeSlider.setValue(parseInt(_val));
+				_cmzr.builderSizeSlider.setMin(minMax[0]);
+				_cmzr.builderSizeSlider.setMax(minMax[1]);
+				_cmzr.builderSize.show();
+				break;
+			case 'Color':
+				_cmzr.builderColor.setTitle(this.type + ' ' + ((_from == this.getCustomizer().highlight) ? 'highlight ' : '') + _key);
+				_cmzr.builderColor.setType(this.getType());
+				_cmzr.builderColor.setHighlight((_from == this.getCustomizer().highlight));
+				_cmzr.builderColor.setColor(_val);
+				_cmzr.builderColor.setColors(this.getColors());
+				_cmzr.builderColor.show();
+				
+				
+				break;
+			case 'Input':
+				_cmzr.customizeInput.setValue(_val);
+				_cmzr.builderInput.show();
+				break;
+			default:
+				_cmzr.builderPopup.show();
+				break;
+		}
+		if (_key.toLowerCase().search('background') != -1) _cmzr.builderPattern.show();
+		
+		if (_i == this.getCustomizer().master.length - 1) {
+			this.updatePreview();
+			this.spinner(false);
+		}
+		if (this.togglenext) _cmzr.drawer.setOpen(!_cmzr.drawer.open);
+		//@* this is the SLOW loop
+	},
 	
 	
 	
@@ -195,11 +329,11 @@ enyo.kind({
 	//@* events
 	
 	getPrepared: function() {
-		var _cmzr = copy(this.customizer),
+		var _cmzr = this.getCustomizer(),
 			_th = {
 				styles: _cmzr.styles,
 				highlight: _cmzr.highlight,
-				type: this.type
+				type: this.getType()
 			};
 		return _th;
 	},
@@ -217,7 +351,8 @@ enyo.kind({
 	load: function(s, e) {
 		var _th = this.getPrepared();
 		this.spinner(true);
-		enyo.Signals.send('loadCustom', {theme: copy(_th)});
+		this.log(copy(_th), copy(this.getElement()));
+		enyo.Signals.send('loadCustom', {theme: JSON.stringify(_th)});
 		this.reset();
 	},
 	//@* event
@@ -227,10 +362,10 @@ enyo.kind({
 		this.spinner(true);
 		var _th = this.getPrepared(),
 			_n = this.$.nameInput.getValue();
-		if (!_n || !this.validTheme) return;
+		if (!_n || !this.getValidTheme()) return;
 		_th.name = _n;
-		this.log(copy(_th));
-		enyo.Signals.send('saveToThemesList', {theme: copy(_th)});
+		this.log(copy(_th), copy(this.getElement()));
+		enyo.Signals.send('saveToThemesList', {theme: JSON.stringify(_th)});
 		this.reset();
 	},
 	//@* event
@@ -238,7 +373,7 @@ enyo.kind({
 	//@* deletes the current theme
 	deleteTheme: function(s, e) {
 		this.spinner(true);
-		enyo.Signals.send('deleteTheme', {type: this.type, theme: this.themeName,
+		enyo.Signals.send('deleteTheme', {type: this.getType(), theme: this.getThemeName(),
 			callback: function(deleted) {if (deleted) this.reset()}.bind(this)});
 	},
 	//@* event
@@ -247,7 +382,7 @@ enyo.kind({
 	email: function(s, e) {
 		AppUtils.sendEmail({
 			to: [{name: 'Neo', address: 'fxjmapps@gmail.com'}],
-			subject: 'My Neo theme: ' + this.themeName,
+			subject: 'My Neo theme: ' + this.getThemeName() + ' ' + this.getType(),
 			msg: enyo.json.stringify(this.customizer)
 		});
 	},
@@ -256,7 +391,7 @@ enyo.kind({
 	//@* loads the current theme for that preset and resets themes
 	choosePreset: function(s, e) {
 		this.spinner(true);
-		enyo.Signals.send('loadTheme', {type: this.type, theme: e.selected.value});
+		enyo.Signals.send('loadTheme', {type: this.getType(), theme: e.selected.value});
 		this.reset();
 	},
 	
@@ -280,11 +415,11 @@ enyo.kind({
 			_preset = this.$.builder.children[_i],
 			_p;
 		if (s.name == 'nameInput') return this.setThemeName(_v);
-		_p = _preset.$.title.getContent().substr(this.type.length + 1).toLowerCase();
+		_p = _preset.$.title.getContent().substr(this.getType().length + 1).toLowerCase();
 		switch (_p) {
 			case 'layout':
 				enyo.forEach(this.$.livePreview.children, function(_c) {
-					if (_c.$.themer.validate(_v)) this.customizer.styles.layout = _v;
+					if (_c.$.themer.validate(_v)) this.getCustomizer().styles.layout = _v;
 				}.bind(this));
 				this.updatePreview();
 				break;
@@ -293,207 +428,23 @@ enyo.kind({
 	//@* event
 	//@* color slider moving
 	sliding: function(s, e) {
-		var mixin = {},
-			highlight = false,
-			_i = e.index,
-			property = s.parent.name,
-			_preset = this.$.builder.children[_i],
-			_p = _preset.$.title.getContent().substr(this.type.length + 1),
-			_hi = _p.toLowerCase().search('highlight');
-		if (_hi != -1) {
-			highlight = true;
-			_p = _p.substr(_hi + 10);
-		}
-		switch (property) {
-			case 'builderColor':
-				mixin[_p] = 'rgb(' + 
-					Math.round(_preset.$.builderRedSlider.getValue()) + ',' +
-					Math.round(_preset.$.builderGreenSlider.getValue()) + ',' +
-					Math.round(_preset.$.builderBlueSlider.getValue()) + ')';
-				break;
-			case 'builderSize':
-				var _n = Math.round(_preset.$.builderSizeSlider.getValue());
-				if (_p.toLowerCase().search('weight') >= 0) mixin[_p] = _n + '';
-					else mixin[_p] = _n + 'px';
-				break;
-		}
-		if (highlight != true) this.customizer.styles = enyo.mixin(this.customizer.styles, mixin);
-			else this.customizer.highlight = enyo.mixin(this.customizer.highlight, mixin);
-		this.updatePreview();
+		
 	},
 	//@* event
 	//@* color popup list select
 	//@* fetches the RGB value from the color that was selected
 	pickColor: function(s, e) {
-		var mixin = {},
-			highlight = false,
-			_v = s.selected.content,
-			_i = e.index,
-			_preset = this.$.builder.children[_i],
-			_p = _preset.$.title.getContent().substr(this.type.length + 1),
-			_hi = _p.toLowerCase().search('highlight');
-		if (_hi != -1) {
-			highlight = true;
-			_p = _p.substr(_hi + 10);
-		}
-		switch (_v) {
-			case 'custom': break;
-			case 'transparent': break;
-			default:
-				var RGB = getRGB(_v),
-					_cs = RGB.match(/\d+/g);
-				if (_cs == null) _cs = [0,0,0];
-				_preset.$.builderRedSlider.setValue(_cs[0]);
-				_preset.$.builderGreenSlider.setValue(_cs[1]);
-				_preset.$.builderBlueSlider.setValue(_cs[2]);
-				mixin[_p] = RGB;
-				if (highlight != true) this.customizer.styles = enyo.mixin(this.customizer.styles, mixin);
-					else this.customizer.highlight = enyo.mixin(this.customizer.highlight, mixin);
-				this.updatePreview();
-				break;
-		}
-	},
-	//@* private
-	//@* preset list setup item
-	setupPreset: function(s, e) {
-		var _i = e.index,
-			_p = this.presets[_i],
-			_cmps = this.getPreview(_i, this.type, _p.themePreview, true);
-		e.item.$.preset.destroyClientControls();
-		e.item.$.preset.createComponents(_cmps);
-		enyo.forEach(e.item.$.preset.children, function(_tc) {
-			var _orig = _tc;
-			if (!_tc.$.themer && _tc.children[1] && _tc.children[1].kind != 'Neo.ThemeFile')
-				_tc = _tc.children[1];
-					else if (!_tc.$.themer) _tc = _orig.children[0];
-			_tc.$.themer.preview(_tc.themePreview);
-			if (_tc.selectItem) _tc.selectItem(_tc.highlighted);
-			_orig.render();
-		}, this);
-		e.item.$.preset.render();
-		if (_p.last) this.spinner(false);
-	},
-	//@* private
-	//@* on preset tapped
-	//@* we want to build a new theme based on this preset type
-	presetTap: function(s, e) {
-		this.log();
-		this.spinner(true);
-		var showItems = ['save', 'load', 'email', 'builderBox'],
-			_ch = s.children[0],
-			_i = e.index,
-			_t,
-			custom = this.getCustom(),
-			_e = copy(this.element);
-		
-		if (_ch.name == 'pickerDecorator' && _ch.children[1].showing == true) return;
-		for (var _key in showItems) this.$[showItems[_key]].show();
-		this.$.presetBox.hide();
-		this.preset = this.presets[_i];
-		_t = this.preset.themePreview;
-		this.customizer = {
-			master: [],
-			styles: enyo.mixin(_e.styles, copy(this.themes[_t].styles)),
-			highlight: enyo.mixin(_e.highlight, this.themes[_t].highlight)
-		}
-		for (var _cmz in this.customizer.styles) this.customizer.master.push(_cmz);
-		for (var _cmz in this.customizer.highlight) this.customizer.master.push('highlight ' + _cmz);
-		if (custom && custom[_t]) {
-			this.$.nameInput.setValue(_t);
-			this.setThemeName(_t);
-			this.$.deleteTheme.show();
-		}
-		setTimeout(enyo.bind(this, function(){
-			var _cmps = this.getPreview(50, this.type, _t, false);
-			this.$.livePreview.destroyClientControls();
-			this.$.livePreview.createComponents(_cmps, {owner: this});
-			this.$.livePreview.render();
-			this.$.builder.setCount(this.customizer.master.length);
-			this.$.builder.build();
-			this.render();
-			this.reflow();
-		}), 100);
 		
 	},
-	//@* private
-	//@* customizer setup item
-	//@* this is the SLOW loop...
-	setupCustomizer: function(s, e) {
-		var _i = e.index,
-			cmzr = e.item,
-			_cmzr = cmzr.$,
-			foundKey = undefined,
-			presetType = 'Size',
-			mod = '',
-			_val,
-			_key = this.customizer.master[_i],
-			_from = this.customizer.styles,
-			customize;
-		
-		if (typeof _key === undefined) return;
-		
-		if (_key.indexOf('highlight') != -1) {
-			_from = this.customizer.highlight;
-			_key = _key.substr(10);
-		}
-		
-		customize = _from[_key];
-		//@* set the value of our preset to what we found
-			_val = _from[_key];
-		// determine the preset type
-			if (_key.toLowerCase().search('color') != -1) presetType = 'Color';
-			if (_key.toLowerCase().search('layout') != -1) presetType = 'Input';
-		_cmzr.title.setContent(this.type + ' ' + ((_from == this.customizer.highlight) ? 'highlight ' : '') + _key);
-		_cmzr.inputDecorator.show();
-		// set our preset builder up
-		
-		//this.log(_key, _val, _from)
-		switch (presetType) {
-			case 'Size':
-				// also here, we want to set the min and the max for the slider
-				// according to whether it's a margin, padding, letter spacing, or just font size
-				var minMax = this.getMinMax(_key);
-				_cmzr.builderSizeSlider.setValue(parseInt(_val));
-				_cmzr.builderSizeSlider.setMin(minMax[0]);
-				_cmzr.builderSizeSlider.setMax(minMax[1]);
-				_cmzr.builderSize.show();
-				break;
-			case 'Color':
-				var _cs = _val.match(/\d+/g),
-					_cmps = [];
-				if (_cs == null) {
-					_cs = getRGB(_val).match(/\d+/g);
-					if (_cs == null) _cs = [0,0,0];
-				}
-				_cmzr.builderRedSlider.setValue(_cs[0]);
-				_cmzr.builderGreenSlider.setValue(_cs[1]);
-				_cmzr.builderBlueSlider.setValue(_cs[2]);
-				_cmzr.builderColorPicker.destroyClientControls();
-				for (var _c in this.colors) {_cmps.push({content: this.colors[_c], active: parseInt(_c) == 0})}
-				_cmzr.builderColorPicker.createComponents(_cmps);
-				_cmzr.builderColor.show();
-				break;
-			case 'Input':
-				_cmzr.customizeInput.setValue(_val);
-				_cmzr.builderInput.show();
-				break;
-			default:
-				_cmzr.builderPopup.show();
-				break;
-		}
-		if (_key.toLowerCase().search('background') != -1) _cmzr.builderPattern.show();
-		
-		if (_i == this.customizer.master.length - 1) {
-			this.updatePreview();
-			this.spinner(false);
-		}
-			
-		//@* this is the SLOW loop
-	},
+
 	
 	
 	
-	
+	updateBuilder: function(s, e) {
+		var customizer = e.customizer;
+		enyo.mixin(this.customizer, e.customizer);
+		this.updatePreview();
+	},
 	
 	
 	
@@ -583,13 +534,13 @@ enyo.kind({
 				]};
 				break;
 		}
-		this.log(_cmp)
+		//this.log(_cmp)
 		_c.push(_cmp);
 		return _c;
 	},
 	updatePreview: function() {
-		var _styles = copy(this.customizer.styles),
-			_highlight = copy(this.customizer.highlight);
+		var _styles = this.getCustomizer().styles,
+			_highlight = this.getCustomizer().highlight;
 		enyo.forEach(this.$.livePreview.children, function(_tc){
 			var _orig = _tc;
 			if (!_tc.$.themer && _tc.children[1] && _tc.children[1].kind != 'Neo.ThemeFile')
@@ -618,7 +569,7 @@ enyo.kind({
 	
 	//@* private
 	//@* gets slider min and max values for a style
-	getMinMax: function(style){
+	getMinMax: function(style) {
 		var min = 0,
 			max = 100;
 		switch (style) {
@@ -685,9 +636,9 @@ enyo.kind({
     //@* returns new instance of custom themes object
     getCustom: function() {
         try {
-          var c = JSON.parse(App.Prefs.get(this.type + '_customThemes')) || {};
+          var c = JSON.parse(App.Prefs.get(this.getType() + '_customThemes')) || {};
         } catch(e) {c = {}}
-        if (c == {}) App.Prefs.set(this.type + '_customThemes', c);
+        if (c == {}) App.Prefs.set(this.getType() + '_customThemes', c);
         c = enyo.clone(c);
         return c;
     },

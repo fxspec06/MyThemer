@@ -2,15 +2,15 @@ enyo.depends(
 	
 // our app CSS file
 	"Themes.css",
-	
-	
-// individual packages
-	"elements",
-	"utils/TweakElements.js",
-	"utils/basic.js",
-	
+
 // 
 	"builders",
+
+// individual packages
+	"elements",
+	"utils/",
+	
+
 
 // we need this
 	"ThemeFile.js",

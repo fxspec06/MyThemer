@@ -2,8 +2,8 @@ enyo.kind({
 	name: 'Neo.Themes_basic',
 	classes: 'neo-themes',
 	
-	//kind: 'Scroller',
-	//touch: true,
+	kind: 'Scroller',
+	touch: true,
 	style: 'color: white;',
 	fit: true,
 	
@@ -18,44 +18,29 @@ enyo.kind({
 	},
 	
 	components: [
-		{name: 'page', components: [
-			{content: 'Primary color'},
-			{name: 'pri', kind: 'Neo.Themes_ColorSquare', ontap: 'beginSelection'},
-			{content: 'Secondary color'},
-			{name: 'sec', kind: 'Neo.Themes_ColorSquare'},
-			{content: 'Alternate color'},
-			{name: 'alt', kind: 'Neo.Themes_ColorSquare'},
-		    
-		   {content: 'COMING SOON...', style: 'color: red; text-transform: italics;'},
-			{fit: true},
-			
-			{name: 'bottomtool', kind: 'Neo.Toolbar', middle: [
-				{kind: 'Neo.Button', ontap: 'close', text: 'Apply', icon: 'close'},
-				{kind: 'Neo.Button', ontap: 'close', text: 'Cancel', icon: 'close'},
-			]},
+		/*
+		{content: 'Primary color'},
+		{name: 'pri', kind: 'Neo.Themes_ColorSquare'},
+		{content: 'Secondary color'},
+		{name: 'sec', kind: 'Neo.Themes_ColorSquare'},
+		{content: 'Alternate color'},
+		{name: 'alt', kind: 'Neo.Themes_ColorSquare'},
+	    */
+	   {content: 'COMING SOON...', style: 'color: red; text-transform: italics;'},
+		{fit: true},
+		
+		{name: 'bottomtool', kind: 'Neo.Toolbar', middle: [
+			//{kind: 'Neo.Button', ontap: 'close', text: 'Apply', icon: 'close'},
+			{kind: 'Neo.Button', ontap: 'close', text: 'Cancel', icon: 'close'},
 		]},
-		{name: 'extras'}
+		
+		
  	],
  	
  	create: function() {
  		this.inherited(arguments);
  		
- 		this.beginSelection();
- 	},
- 	
- 	beginSelection: function(s, e){
  		
- 		this.$.extras.destroyClientControls();
- 		this.$.extras.setShowing(true);
- 		this.$.page.setShowing(false);
-		this.$.extras.createComponent(
-				//{name: 'basic', fit: true, layoutKind: 'FittableRowsLayout', content: 'COMING SOON...', classes: 'neo-themes-caption'},
-				{name: 'colorpage', kind: 'Neo.Themes_ColorPage', fit: true, layoutKind: 'FittableRowsLayout'},
-				{owner: this}
-		);
-		this.$.extras.render();
-		this.reflow();
- 		//this.bubbleUp('choose', {colorTitle: s.name});
  	},
  	
  	//FIXME
