@@ -271,7 +271,7 @@ enyo.kind({
 		function randomDate(start, end) {return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));}
 
 		function randomPick(howmany) {return Math.round(Math.random(0, 1) * howmany, 1);}
-		function randomTweet(id) {
+		function randomTweet(id, self) {
 			
 
 			var author_username = usernames[randomPick(6)];
@@ -288,15 +288,16 @@ enyo.kind({
 				author_avatar: author_avatar,
 				publish_date: publish_date,
 				spaz_id: spaz_id,
-				reposter_username: reposter_username
+				reposter_username: reposter_username,
+				is_favorite: (self.info.type == SPAZ_COLUMN_FAVORITES)
 			}
 		}
 
 
 		this.tweets = [];
 		for (var i = 0; i < 100; i++) {
-			var tweet = randomTweet(i);
-			
+			var tweet = randomTweet(i, this);
+			//console.error(tweet.is_favorite)
 			this.tweets.push(
 				tweet
 			);

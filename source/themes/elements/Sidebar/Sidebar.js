@@ -214,8 +214,8 @@ enyo.kind({
 			}),
 			enyo.bind(this, function(xhr, msg, exc){
 				console.error("Couldn't find user's avatar");
-				this.$.avatar.setIcon('');
-				this.$.accountName.setText('');
+				this.$.avatar.setIcon('icon_128.png');
+				this.$.accountName.setText('Neo');
 				this.$.accountName.container.render();
 				this.render();
 			})

@@ -629,7 +629,7 @@ enyo.kind({
 	//@* shows a specified enyo object, based on type, with args
 	showMore: function(type, args) {
 		if (type != 'undefined' && this.actions[this.actions.length - 1] != type) this.actions.push(type);
-		
+		console.error(type);
 		switch (type) {
 			case 'detailContent':
 				if (this.$.detailContent) return;
@@ -643,6 +643,7 @@ enyo.kind({
 				this.actions.pop();
 //				AppUI.viewUser(account.username, account.service, account.account_id);
 				AppUI.viewUser('Neo_webOS', 'twitter', '');
+				console.error('view user...');
 				return;
 				break;
 			case 'timeline':

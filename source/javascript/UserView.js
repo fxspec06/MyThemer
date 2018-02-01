@@ -270,9 +270,9 @@ enyo.kind({
 		window.AppCache.getUser(u, s, a,
 			enyo.bind(this, function(user) {this.setUser(user)}),
 			enyo.bind(this, function(data) {
-				if (data.status === 404) AppUtils.showBanner(enyo.macroize('No user named {$username}', {username: u}));
+				/*if (data.status === 404) AppUtils.showBanner(enyo.macroize('No user named {$username}', {username: u}));
 				else AppUtils.showBanner(enyo.macroize('Error loading info for {$username}', {username: u}));
-				this.doDestroy();
+				this.doDestroy();*/
 			}));
 	},
 	//@* public

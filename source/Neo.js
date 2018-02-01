@@ -99,7 +99,7 @@ enyo.kind({
 
 		setTimeout(function() {
 			var toBG = this.$.sidebar.$.list.children[0].$.item.$.themer.styles.backgroundColor;
-			console.error(toBG);
+			//console.error(toBG);
 			var sidebarBG = this.darkLight(toBG);
 			this.$.sidebar.applyStyle('background-color', sidebarBG);
 			
@@ -112,7 +112,7 @@ enyo.kind({
 	darkLight: function(color) {
 		//setTimeout(function(){
 			if (color.indexOf('(') == -1) color = getRGB(color);
-			console.error(color);
+			//console.error(color);
 		
 
 			var RGB = color.substring(color.indexOf('(')+1, color.indexOf(')')).split(',');
@@ -121,7 +121,7 @@ enyo.kind({
 				blue = parseInt(RGB[1]),
 				green = parseInt(RGB[2]);
 
-			console.error(red, blue, green);
+			//console.error(red, blue, green);
 
 			if (red > 128) red -= 50;
 				else red += 50;
@@ -139,7 +139,7 @@ enyo.kind({
 			if (green < 0) green = 0;
 				else if (green > 255) green = 255;
 			
-			console.error(red, blue, green);
+			//console.error(red, blue, green);
 
 			return 'rgba(' + red + ',' + blue + ',' + green + ', 1)';
 		//}.bind(this), 0);

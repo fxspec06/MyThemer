@@ -49,6 +49,10 @@ enyo.kind({
 		if (_c[_t]) enyo.mixin(_l, _c[_t]);
 			else enyo.mixin(_l, this._load());
 		//this.log(copy(_l), _t);
+
+		this.loadDefaults();
+
+
 		this.setHighlight(_l.highlight);
 		this.setStyles(_l.styles);
 		this.bubble('onUpdate', _l.styles || _l);
@@ -225,9 +229,12 @@ enyo.kind({
 			this.setStyles(theme.styles);
 			this.setHighlight(theme.highlight);
 			this.saveTheme();
+			
+
 			//enyo.Signals.send('loadTheme', {type: this.getType(), theme: 'saved'});
-			App.Prefs.set("wasTheming", true);
-			location.reload();
+			/*App.Prefs.set("wasTheming", true);
+			location.reload();*/
+			resetApp();
 		}
 	},
 	
