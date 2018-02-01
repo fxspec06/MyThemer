@@ -81,4 +81,5 @@ var SPAZ_DEFAULT_PREFS = {
 	'run-isFirst':true,
 	'run-isNew':true,
 	'run-count':0
+
 };

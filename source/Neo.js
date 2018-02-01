@@ -92,6 +92,10 @@ enyo.kind({
 		
 		////////
 		//setTimeout(function(){AppUI.userChange(null);}, 1000);
+		if (App.Prefs.get("wasTheming")) {
+			AppUI.showMore("themes");
+			App.Prefs.set("wasTheming", false);
+		}
 	},
 	
 	windowParamsChangeHandler: function(inParams) {

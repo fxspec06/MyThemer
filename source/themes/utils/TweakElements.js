@@ -65,26 +65,14 @@ enyo.kind({
 									oninput: 'keypress'},
 							]}
 						]},
-						{name: 'builder', kind: 'Repeater', onSetupItem: 'setupCustomizer', components: [
+						{name: 'builder', kind: 'Repeater', onSetupItem: 'setupCustomizer', onUpdate: 'updateBuilder', components: [
 							{name: 'title', classes: 'onyx-groupbox-header'},
 							{style: 'max-width: 300px; text-align: center; margin: auto; border: none;', classes: 'onyx-groupbox', components: [
 								{name: 'builderPopup', showing: false, kind: 'onyx.PickerDecorator', components: [
 									{kind: 'onyx.PickerButton'},
 									{name: 'builderPopupList', kind: 'Neo.PopupList'}
 								]},
-								{name: 'builderColor', showing: false, components: [
-									{content: 'Red', classes: 'onyx-groupbox-header'},
-									{name: 'builderRedSlider', onChange: 'sliding', onChanging: 'sliding', kind: 'onyx.Slider', min:0,max:255},
-									{content: 'Green', classes: 'onyx-groupbox-header'},
-									{name: 'builderGreenSlider', onChange: 'sliding', onChanging: 'sliding', kind: 'onyx.Slider', min:0,max:255},
-									{content: 'Blue', classes: 'onyx-groupbox-header'},
-									{name: 'builderBlueSlider', onChange: 'sliding', onChanging: 'sliding', kind: 'onyx.Slider', min:0,max:255},
-									
-									{kind: 'onyx.PickerDecorator', components: [
-										{kind: 'onyx.PickerButton'},
-										{name: 'builderColorPicker', kind: 'Neo.PopupList', onSelect: 'pickColor'}
-									]}
-								]},
+								{name: 'builderColor', kind: 'Neo.ColorBuilder', showing: false},
 								{name: 'builderPattern', showing: false, components: [
 									{content: 'Pattern', classes: 'onyx-groupbox-header'},
 									//{name: 'builderPatternPreview', kind: 'fx.Fader', showing: false, style: 'height: 100px; width: 100px;'},
@@ -153,12 +141,13 @@ enyo.kind({
 	customize: function(s, sg) {
 		this.spinner(true);
 		this.$.back.show();
-		this.element = copy(sg.element);
+		console.error(s, sg);
+		this.element = copy(sg.theme.element);
 		if (!this.element.highlight) this.element.highlight = {}
-		this.type = sg.type;
-		this.themes = enyo.mixin(sg.themes, {custom: {
-			styles: sg.styles,
-			highlight: sg.highlight
+		this.type = sg.theme.type;
+		this.themes = enyo.mixin(sg.theme.themes, {custom: {
+			styles: sg.theme.styles,
+			highlight: sg.theme.highlight
 		}});
 		this.$.themer.setIndex(1);
 		this.$.builderBox.hide();
@@ -218,7 +207,7 @@ enyo.kind({
 		var _th = this.getPrepared();
 		this.spinner(true);
 		enyo.Signals.send('loadCustom', {theme: copy(_th)});
-		this.reset();
+		//this.reset();
 	},
 	//@* event
 	//@* save button tapped
@@ -226,7 +215,9 @@ enyo.kind({
 	save: function(s, e) {
 		this.spinner(true);
 		var _th = this.getPrepared(),
-			_n = this.$.nameInput.getValue();
+			//_n = this.$.nameInput.getValue();
+			_n = this.themeName;
+
 		if (!_n || !this.validTheme) return;
 		_th.name = _n;
 		this.log(copy(_th));
@@ -353,6 +344,26 @@ enyo.kind({
 				break;
 		}
 	},
+
+
+
+
+	//@* private
+	//@* called from colorBuilder
+	updateBuilder: function(s, e) {
+		var customizer = e.customizer;
+		enyo.mixin(this.customizer, e.customizer);
+		this.updatePreview();
+	},
+	
+	
+	
+
+
+
+
+
+
 	//@* private
 	//@* preset list setup item
 	setupPreset: function(s, e) {
@@ -391,6 +402,7 @@ enyo.kind({
 		this.$.presetBox.hide();
 		this.preset = this.presets[_i];
 		_t = this.preset.themePreview;
+		//console.error(_t, this.preset, this.themes);
 		this.customizer = {
 			master: [],
 			styles: enyo.mixin(_e.styles, copy(this.themes[_t].styles)),
@@ -459,7 +471,7 @@ enyo.kind({
 				_cmzr.builderSize.show();
 				break;
 			case 'Color':
-				var _cs = _val.match(/\d+/g),
+				/*var _cs = _val.match(/\d+/g),
 					_cmps = [];
 				if (_cs == null) {
 					_cs = getRGB(_val).match(/\d+/g);
@@ -471,7 +483,15 @@ enyo.kind({
 				_cmzr.builderColorPicker.destroyClientControls();
 				for (var _c in this.colors) {_cmps.push({content: this.colors[_c], active: parseInt(_c) == 0})}
 				_cmzr.builderColorPicker.createComponents(_cmps);
+				_cmzr.builderColor.show();*/
+
+				_cmzr.builderColor.setTitle(this.type + ' ' + ((_from == this.getCustomizer().highlight) ? 'highlight ' : '') + _key);
+				_cmzr.builderColor.setType(this.getType());
+				_cmzr.builderColor.setHighlight((_from == this.getCustomizer().highlight));
+				_cmzr.builderColor.setColor(_val);
+				_cmzr.builderColor.setColors(this.colors);
 				_cmzr.builderColor.show();
+
 				break;
 			case 'Input':
 				_cmzr.customizeInput.setValue(_val);
@@ -547,6 +567,8 @@ enyo.kind({
 				sample: sample,
 				themePreview: preview,
 			};
+
+		console.error(index, type, preview, sample);
 		switch (type) {
 			case 'button':
 				_cmp = enyo.mixin({kind: 'Neo.Button', text: preview, icon: 'settings', collapse: false}, _def);
@@ -583,7 +605,7 @@ enyo.kind({
 				]};
 				break;
 		}
-		this.log(_cmp)
+		this.log(_cmp);
 		_c.push(_cmp);
 		return _c;
 	},

@@ -115,16 +115,16 @@ enyo.kind({
 	//@* customize the current theme
 	customize: function() {
 		var _cstm = this.getCustom(),
-			_el = this[this.type],
+			_el = this[this.getType()],
 			newThemes = [],
 			_cmzr;
 		for (var _c in _cstm)
 			if (enyo.indexOf(_cstm[_c].name, _el.themes) == -1 && _cstm[_c].name)
 				_el.themes.push(_cstm[_c].name);
-		_cmzr = {type: this.type, element: _el, styles: this.loadStyles(),
-			highlight: this.loadHighlight(), themes: enyo.mixin(this.owner.themes, _cstm)}
-		this.log(this.type, _cmzr);
-		enyo.Signals.send('customize', _cmzr);
+		_cmzr = {type: this.getType(), element: _el, styles: this.loadStyles(),
+			highlight: this.loadHighlight(), themes: enyo.mixin(copy(this.owner.themes), _cstm)}
+		this.log(this.getType(), _cmzr);
+		enyo.Signals.send('customize', {theme: _cmzr});
 	},
 	
 	
@@ -138,7 +138,7 @@ enyo.kind({
 	//@* loads the signaled theme
 	signalLoad: function(s, sg) {
 		//this.log(s, sg);
-		if (this.type === sg.type || sg.type === 'override') {
+		if (this.getType() === sg.type || sg.type === 'override') {
 			if (sg.theme == 'saved' ) this.loadSaved();
 				else this.loadTheme(sg.theme);
 		}
@@ -149,27 +149,27 @@ enyo.kind({
 	//@* from signals
 	//@* saves the signal theme to themes
 	saveQuickTheme: function(s, sg) {
-		this.log(this, this.type, sg.theme.type);
-		if (!this.type || this.type == null) this.log(this, this.type, s, sg);
-		if (this.type != sg.theme.type) return;
+		//this.log(this, this.type, sg.theme.type);
+		if (!this.getType() || this.getType() == null) this.log(this, this.getType(), s, sg);
+		if (this.getType() != sg.theme.type) return;
 		this.owner.sample = true;
-		this.log('SAVING.............', sg.theme.type, window.saving, this.type);
-		if (window.saving[this.type] != null) {
+		//this.log('SAVING.............', sg.theme.type, window.saving, this.type);
+		if (window.saving[this.getType()] != null) {
 			setTimeout((function(){delete this.owner.sample}).bind(this), 4000, this);
 			return;
 		}
-		window.saving[this.type] = true;
+		window.saving[this.getType()] = true;
 		var c = this.getCustom(),
 			_cstm = enyo.clone({name: sg.theme.name, styles: sg.theme.styles, highlight: sg.theme.highlight});
-		this.log('SAVING QUICK THEME.............');
+		//this.log('SAVING QUICK THEME.............');
 		this.theme = _cstm.name;
 		this.stripNull(_cstm.styles);
 		this.stripNull(_cstm.highlight);
-		this.setStyles(enyo.mixin(this.getDefaults().styles, _cstm.styles));
-		this.setHighlight(enyo.mixin(this.getDefaults().highlight, _cstm.highlight));
+		this.setStyles(/*enyo.mixin(this.getDefaults().styles, */_cstm.styles/*)*/);
+		this.setHighlight(/*enyo.mixin(this.getDefaults().highlight, */_cstm.highlight/*)*/);
 		this.saveTheme();
 		this.saveCustom(_cstm);
-		enyo.Signals.send('loadTheme', {type: this.type, theme: _cstm.name});
+		enyo.Signals.send('loadTheme', {type: this.getType(), theme: _cstm.name});
 	},
 	stripNull: function(object) {
 		for (var key in object) {
@@ -181,19 +181,20 @@ enyo.kind({
 	//@* from signals
 	//@* saves the signal theme to themes
 	saveToThemesList: function(s, sg) {
-		if (!sg.theme.override || window.saving[this.type] != null) {
+		var theme = sg.theme;
+		if (!theme.override || window.saving[this.getType()] != null) {
 			if (!this._fromThemes()) return;
 			if (!this.isPreview()) return;
 		}
 		var c = this.getCustom(),
-			_cstm = {name: sg.theme.name, styles: sg.theme.styles, highlight: sg.theme.highlight};
-		//this.log(sg);
+			_cstm = {name: theme.name, styles: theme.styles, highlight: theme.highlight};
+		this.log(theme);
 		this.theme = _cstm.name;
 		this.setStyles(_cstm.styles);
 		this.setHighlight(_cstm.highlight);
 		this.saveTheme();
 		this.saveCustom(_cstm);
-		if (!sg.theme.override) enyo.Signals.send('loadTheme', {type: this.type, theme: 'saved'});
+		if (!theme.override) enyo.Signals.send('loadTheme', {type: this.getType(), theme: 'saved'});
 		//else enyo.Signals.send('loadTheme', {type: this.type, theme: sg.theme.name});
 	},
 	//@* private
@@ -207,18 +208,21 @@ enyo.kind({
 	//@* from signals
 	//@* saves and then loads the theme that's sent
 	loadCustom: function(s, sg) {
-		if (!sg.theme.override) {
+		var theme = sg.theme;
+		if (!theme.override) {
 			if (!this._fromThemes()) return;
 			if (!this.isPreview()) return;
 		}
 		//this.log(sg.theme.type, this.type)
-		if (this.type === sg.theme.type) {
-			this.log(s, sg);
+		if (this.getType() === theme.type) {
+			this.log(s, theme);
 			this.theme = 'custom';
-			this.setStyles(sg.theme.styles);
-			this.setHighlight(sg.theme.highlight);
+			this.setStyles(theme.styles);
+			this.setHighlight(theme.highlight);
 			this.saveTheme();
-			enyo.Signals.send('loadTheme', {type: this.type, theme: 'saved'});
+			//enyo.Signals.send('loadTheme', {type: this.getType(), theme: 'saved'});
+			App.Prefs.set("wasTheming", true);
+			location.reload();
 		}
 	},
 	
@@ -310,15 +314,18 @@ enyo.kind({
 	//@* saves the current theme only if the owner is a sample
 	saveTheme: function() {
 		if (!this.isSample()) return;
-		var _n = this.type + '_theme',
+		var _n = this.getType() + '_theme',
 			_statics = this.getStatics(),
-			_saveObj = {
+			_saveObj = enyo.mixin({
 				name: this.theme,
-				styles: enyo.mixin(_statics.styles, this.getStyles()),
-				highlight: enyo.mixin(_statics.highlight, this.getHighlight())
-			};
+				styles: _statics.styles,
+				highlight: _statics.highlight
+			}, {
+				styles: this.getStyles(),
+				highlight: this.getHighlight()
+			});
 		
-		delete _saveObj.styles.originator;
+		//delete _saveObj.styles.originator;
 		this.log(_n, _saveObj.name, _saveObj);
 		_saveObj = JSON.stringify(_saveObj);
 		
@@ -332,19 +339,19 @@ enyo.kind({
 		
 		this.log('Saving custom slot...', _c.name, _c, _cstm);
         _cstm = JSON.stringify(_cstm);
-		App.Prefs.set(this.type + '_customThemes', _cstm);
+		App.Prefs.set(this.getType() + '_customThemes', _cstm);
 	},
 	//@* public
 	//@* gets styles from localStorage and loads to this.styles
 	loadStyles: function() {
-		var _n = this.type + '_theme',
+		var _n = this.getType() + '_theme',
 			_l = JSON.parse(App.Prefs.get(_n));
 		//@* reset this.styles
 			this.setStyles({});
 		//@* if theme doesn't exist, saveTheme will create it
 			if ( !_l || !_l.name || !_l.styles) this.saveTheme();
 		_l = JSON.parse(App.Prefs.get(_n)) || {};
-		if (!_l.styles) _l.styles = enyo.mixin(this.getStatics().styles, this.getDefaults().styles);
+		if (!_l.styles) { _l.styles = this.getStatics().styles; enyo.mixin(_l.styles, this.getDefaults().styles); }
 		this.setStyles(_l.styles);
 		//this.log(_l);
 		return this.getStyles();
@@ -352,14 +359,15 @@ enyo.kind({
 	//@* public
 	//@* gets highlight from localStorage and loads to this.highlight
 	loadHighlight: function() {
-		var _n = this.type + '_theme',
+		var _n = this.getType() + '_theme',
 			_l = JSON.parse(App.Prefs.get(_n));
 		//@* reset this.highlight
 			this.setHighlight({});
 		//@* if theme doesn't exist, saveTheme will create it
 			if ( !_l || !_l.name || !_l.highlight) this.saveTheme();
 		_l = JSON.parse(App.Prefs.get(_n)) || {};
-		if (!_l.highlight) _l.highlight = enyo.mixin(this.getStatics().highlight, this.getDefaults().highlight);
+		if (!_l.highlight) { _l.highlight = this.getStatics().highlight; enyo.mixin(_l.highlight, this.getDefaults().highlight); }
+		//if (!_l.highlight) _l.highlight = enyo.mixin(this.getStatics().highlight, this.getDefaults().highlight);
 		this.setHighlight(_l.highlight);
 		//this.log(_load);
 		return this.getHighlight();
@@ -368,7 +376,7 @@ enyo.kind({
 	//@* private
 	//@* returns new instance of static hard-coded, empty theme
 	getStatics: function() {
-		var s = enyo.clone(this[this.type]);
+		var s = enyo.clone(this[this.getType()]);
 		return s;
 	},
 	//@* private
@@ -390,9 +398,9 @@ enyo.kind({
 	//@* returns new instance of custom themes object
 	getCustom: function() {
 	    try {
-		  var c = JSON.parse(App.Prefs.get(this.type + '_customThemes')) || {};
+		  var c = JSON.parse(App.Prefs.get(this.getType() + '_customThemes')) || {};
 		} catch(e) {c = {}}
-		if (c == {}) App.Prefs.set(this.type + '_customThemes', JSON.stringify(c));
+		if (c == {}) App.Prefs.set(this.getType() + '_customThemes', JSON.stringify(c));
 		c = enyo.clone(c);
 		//this.log(c, JSON.parse(localStorage.preferences_json))
 		return c;
@@ -401,7 +409,7 @@ enyo.kind({
     //@* returns new instance of custom themes object
 	_load: function() {
 	    try {
-          var c =  JSON.parse(App.Prefs.get(this.type + '_theme')) || {};
+          var c =  JSON.parse(App.Prefs.get(this.getType() + '_theme')) || {};
         } catch(e) {c = {}}
 	  return c;
 	},
@@ -413,9 +421,9 @@ enyo.kind({
 		//@* custom
 			if (theme.toLowerCase() === 'custom') return true;
 		//@* if there is no type defined, invalid
-			if (!this.type || !this[this.type]) return false;
+			if (!this.getType() || !this[this.getType()]) return false;
 		//@* check if the theme exists
-			test = this[this.type].themes;
+			test = this[this.getType()].themes;
 			for (var r in test) if (test[r] == theme) {return true}
 		//@* invalid
 			return false;
