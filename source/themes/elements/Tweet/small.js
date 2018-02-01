@@ -189,6 +189,8 @@ enyo.kind({
 				layout: "neo",
 			},
 			highlight: {}
-		}
+		},
+		black: {"styles":{"layout":"official","backgroundColor":"rgba(0,  0,  0, 1)","textColor":"rgba(170,  170,  170, 1)","textSize":"","textWeight":"","letterSpacing":"","textTransform":"","borderLeftSize":"","borderRightSize":"","borderLeftColor":"rgba(68,  68,  68, 1)","borderRightColor":"rgba(68,  68,  68, 1)","borderTopSize":"","borderBottomSize":"","borderTopColor":"rgba(68,  68,  68, 1)","borderBottomColor":"rgba(68,  68,  68, 1)","padding":"","margin":""},"highlight":{"textColor":"rgba(68,  68,  68, 1)","textSize":"","textWeight":"","letterSpacing":"","textTransform":""}}
+		
 	}
 });

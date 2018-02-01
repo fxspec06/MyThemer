@@ -152,7 +152,7 @@ AppUtils.sendEmail = function(opts) {
 		'text':text
 	};
 	
-	var email_srvc = new enyo.webOS.ServiceRequest({
+	/*var email_srvc = new enyo.webOS.ServiceRequest({
 		service: 'palm://com.palm.applicationManager',
 		method: 'open'
 	});
@@ -162,7 +162,12 @@ AppUtils.sendEmail = function(opts) {
 	});
 	email_srvc.response(function(inResponse){
 		enyo.log("email service response...", enyo.json.stringify(inResponse));
-	});
+	});*/
+	for (var i = 0; i < email_params.recipients.length; i++) {
+		var mailtostring = 'mailto:' + email_params.recipients[i].address + '?Subject=' + email_params.summary + '&body=' + email_params.text;
+		console.log(mailtostring);
+		location = mailtostring;
+	}
 };
 
 

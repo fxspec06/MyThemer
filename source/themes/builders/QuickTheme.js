@@ -332,7 +332,7 @@ enyo.kind({
 		setTimeout(this.finish.bind(this), 7300); // 10 second delay to load
 	},
     spinner: function(onoff) {
-    	this.log(onoff ? 'showing' : 'hiding');
+    	//this.log(onoff ? 'showing' : 'hiding');
     	//this.$.spinner[onoff ? 'start' : 'stop']();
     	this.$.spinner.setShowing(onoff);
     	this.$.widgetBox.setShowing(!onoff);

@@ -251,6 +251,12 @@ enyo.kind({
 			},
 			classes: ''
 		},
+
+		black: 
+			{"styles":{"textColor":"rgba(0,170,170,1)"},"highlight":{"backgroundColor":"rgba(170,  170,  170, 1)","textColor":"rgba(0,  0,  0, 1)","textSize":"","textWeight":"","letterSpacing":"","textTransform":"","borderLeftSize":"","borderRightSize":"","borderLeftColor":"rgba(68,  68,  68, 1)","borderRightColor":"rgba(68,  68,  68, 1)","borderTopSize":"","borderBottomSize":"","borderTopColor":"rgba(68,  68,  68, 1)","borderBottomColor":"rgba(68,  68,  68, 1)"}}
+		,
+
+
 		onyx: {
 			styles: {}, highlight: {}
 		}

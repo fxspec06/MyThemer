@@ -509,7 +509,7 @@ enyo.kind({
 		sidebarItem: {
 			//@* public
 			defaultTheme: 'murky',
-			themes: ['neo', 'aqua', 'murky', 'onyx'],
+			themes: ['neo', 'aqua', 'murky', 'onyx', 'black'],
 			//@* protected
 			styles: {
 				width: '',
@@ -548,7 +548,7 @@ enyo.kind({
 		tweet: {
 			//@* public
 			defaultTheme: 'blue',
-			themes: ['neo', 'official', 'officialCondensed', 'blue', 'onyx'],
+			themes: ['neo', 'official', 'officialCondensed', 'blue', 'onyx', 'black'],
 			//@* protected
 			styles: {
 				layout: '',
