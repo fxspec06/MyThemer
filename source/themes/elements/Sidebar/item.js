@@ -2,7 +2,7 @@ enyo.kind({
 	name: 'Neo.SidebarItem',
 	layoutKind: 'FittableColumnsLayout',
 	fit: true,
-	style: 'text-align: center;',
+	style: 'text-align: center; min-width: 200px; margin-left: -0px;',
 	
 	handlers: {
 		ontap: 'itemTap',
@@ -215,6 +215,7 @@ enyo.kind({
 			},
 			classes: ''
 		},
+		white: {"styles":{"width":"248px","backgroundColor":"rgba(255,  255,  255, 1)","textColor":"rgba(79,  112,  79, 1)","textSize":"","textWeight":"","letterSpacing":"","textTransform":"","borderLeftSize":"","borderRightSize":"","borderLeftColor":"rgba(0,  0,  0, 1)","borderRightColor":"rgba(0,  0,  0, 1)","borderTopSize":"","borderBottomSize":"","borderTopColor":"","borderBottomColor":"rgba(0,  0,  0, 1)"},"highlight":{"backgroundColor":"rgba(79,  112,  79, 1)","textColor":"rgba(255,  255,  255, 1)","textSize":"","textWeight":"","letterSpacing":"","textTransform":"","borderLeftSize":"","borderRightSize":"","borderLeftColor":"rgba(0,  0,  0, 1)","borderRightColor":"rgba(0,  0,  0, 1)","borderTopSize":"","borderBottomSize":"","borderTopColor":"rgba(0,  0,  0, 1)","borderBottomColor":"rgba(0,  0,  0, 1)"}},
 		murky: {
 			styles: {
 				width: "250px",

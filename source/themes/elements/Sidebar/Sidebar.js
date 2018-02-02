@@ -51,8 +51,8 @@ enyo.kind({
 		
 		{kind: 'Neo.Toolbar', align: 'left',
 			middle: [
-				{name: 'pin', kind: 'Neo.Button', icon: 'back', ontap: 'collapse', style: 'z-index: 999'},
-				{kind: 'onyx.PickerDecorator', components: [
+				{name: 'pin', kind: 'Neo.Button', icon: 'pin', ontap: 'collapse', style: 'z-index: 999'},
+				{kind: 'onyx.PickerDecorator', style: '', components: [
 					{kind: 'Neo.Button', text: '', icon: 'settings', collapse: true},
 					{name: 'menu', kind: 'Neo.PopupList', onSelect: 'menuSelect'}
 			]}]
@@ -84,15 +84,22 @@ enyo.kind({
 		
 		this.refreshAccountsButton();
 		this.render();
+
+		this.collapse();
+		setTimeout(this.collapse.bind(this), 0);
 	},
 	
 	collapse: function(inSender, inEvent){
 		if (this.getBounds().width != 65) {
+			this.applyStyle('min-width', null);
 			this.applyStyle('width', '65px');
-			this.$.pin.setIcon('forward');
+			this.$.pin.setIcon('list');
+			this.$.pin.applyStyle('margin-left', '-15px;');
 		} else {
+			this.applyStyle('min-width', '180px');
 			this.applyStyle('width', null);
-			this.$.pin.setIcon('back');
+			this.$.pin.setIcon('pin');
+			this.$.pin.applyStyle('margin-left', '');
 		}
 		enyo.Signals.send('setFullscreen', true);
 		enyo.Signals.send('setFullscreen', false);

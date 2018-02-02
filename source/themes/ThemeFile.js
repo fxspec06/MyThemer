@@ -182,7 +182,7 @@ enyo.kind({
 		//this.log('SAVING.............', sg.theme.type, window.saving, this.type);
 		if (window.saving[this.getType()] != null) {
 			if (this.owner != null && this.owner != 'undefined') {
-				setTimeout((function(){delete this.owner.sample}).bind(this), /*400*/0, this);
+				setTimeout(function(){delete this.owner.sample}.bind(this), /*400*/0, this);
 				//delete this.owner.sample;
 			}
 			return;
@@ -490,7 +490,7 @@ enyo.kind({
 		button: {
 			//@* public
 			defaultTheme: 'blue',
-			themes: ['neo', 'aqua', 'blue', 'red', 'onyx'],
+			themes: ['neo', 'aqua', 'blue', 'white', 'red', 'onyx'],
 			
 			//@* protected
 			styles: {
@@ -514,7 +514,7 @@ enyo.kind({
 		toolbar: {
 			//@* public
 			defaultTheme: 'kakhi',
-			themes: ['neo', 'kakhi', 'onyx', 'red', 'steel', 'blue', 'green', 'forest', 'bruins'],
+			themes: ['neo', 'kakhi', 'white', 'onyx', 'red', 'steel', 'blue', 'green', 'forest', 'bruins'],
 			//@* protected
 			styles: {
 				backgroundColor: '',
@@ -541,7 +541,7 @@ enyo.kind({
 		sidebarItem: {
 			//@* public
 			defaultTheme: 'murky',
-			themes: ['neo', 'aqua', 'murky', 'Large', 'green', 'onyx'],
+			themes: ['neo', 'aqua', 'murky', 'white', 'Large', 'green', 'onyx'],
 			//@* protected
 			styles: {
 				width: '',
@@ -613,7 +613,7 @@ enyo.kind({
 		popupList: {
 			//@* public
 			defaultTheme: 'cloudy',
-			themes: ['neo', 'cloudy', 'onyx'],
+			themes: ['neo', 'white', 'cloudy', 'onyx'],
 			//@* protected
 			styles: {
 				backgroundColor: '',

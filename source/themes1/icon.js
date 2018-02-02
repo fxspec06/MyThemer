@@ -127,7 +127,7 @@ enyo.kind({
 			}
 		}
 		
-		this.log(closest, shortestDistance);
+		console.log(closest, shortestDistance);
 		if (closest != '') this._col = closest + '/';
 		
 	},

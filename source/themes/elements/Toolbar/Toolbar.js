@@ -63,6 +63,8 @@ enyo.kind({
 			},
 			classes: ''
 		},
+		white: {"styles":{"backgroundColor":"rgba(255,  255,  255, 1)","textColor":"rgba(79,  112,  79, 1)","textSize":"","textWeight":"","letterSpacing":"","textTransform":"","margin":"","padding":""},"highlight":{}},
+		
 		kakhi: {
 			styles: {
 				backgroundColor: "rgb(85,88,35)",

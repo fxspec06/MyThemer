@@ -33,6 +33,9 @@ enyo.kind({
 			},
 			classes: ""
 		},
+		white: {
+			"styles":{"backgroundColor":"rgba(255,  255,  255, 1)","textColor":"rgba(68,  68,  68, 1)","textSize":"","textWeight":"","letterSpacing":"","borderColor":"rgba(0,  0,  0, 1)","borderWidth":"","textTransform":"","padding":"","margin":"","width":""},"highlight":{}
+		},
 		aqua: {
 			/*styles: {
 				backgroundColor: "teal",

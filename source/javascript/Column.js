@@ -249,15 +249,18 @@ enyo.kind({
 	//@* rebuilds the list from top to bottom
 	buildList: function() {
 		
-		var usernames = ["Bryan", "Craig", "Fafo", "Stevie", "Ken", "Danny"];
-		var fullnames = ["Bryan Leasot", "Craig Dube", "Pablo Murillo", "Steven LaFlesche", "Ken Nguyen", "Daniel Nguyen"];
+		var usernames = ["fxspec06", "Neo_webOS", "WildnPoker", "fxspec06_jail"];
+		var fullnames = ["fx", "neo", "wildn", "jail"];
 		var texts = [
 			"Your Weekend Forecast For Denver, CO (80247) http://dlvr.it/3rcC6F",
 			"T.W.I.T.T.E.R = Tweet With Integrity To Then Earn Respect. – Milana Ryan •• Wanted — Ambitious – Hard Working Individuals! ••>>> http://dk-rec.info/PTS ",
 			"How I got published on Amazon! http://r.ebay.com/ogdiZ5",
 			"6 questions about ads in the gmail tabbed inbox. What’s your opinion? http://wttw.me/14hztAT",
 			"Don’t be such a potty mouth! Introducing @virgintrains magic new talking toilets (honestly!) http://virg.in/tlh",
-			'“Your idea is probably not new.” 5 lessons every startup founder should learn: http://trib.al/TsMKKjO'
+			'“Your idea is probably not new.” 5 lessons every startup founder should learn: http://trib.al/TsMKKjO',
+			'Christmas was GREAT!',
+			'Boston Bruins are the best team in the NHL',
+			'Brady never cheated! Deflategate was a scam, nothing happened at spygate, and the Patriots are just the best team ever!'
 		];
 		var avatar = [
 			"http://www.uidownload.com/files/232/925/277/avatar-face-icon.png",
@@ -274,12 +277,12 @@ enyo.kind({
 		function randomTweet(id, self) {
 			
 
-			var author_username = usernames[randomPick(6)];
-			var author_fullname = fullnames[randomPick(6)];
-			var text = texts[randomPick(6)];
-			var author_avatar = avatar[randomPick(6)];
-			var publish_date = randomDate(new Date(2012, 0, 1), new Date());
-			var reposter_username = usernames[randomPick(6)];
+			var author_username = usernames[randomPick(usernames.length-1)];
+			var author_fullname = fullnames[randomPick(fullnames.length-1)];
+			var text = texts[randomPick(texts.length-1)];
+			var author_avatar = avatar[randomPick(avatar.length-1)];
+			var publish_date = randomDate(new Date(2017, 12, 25), new Date());
+			var reposter_username = usernames[randomPick(usernames.length-1)];
 			var spaz_id = id+1;
 			return {
 				author_username: author_username,

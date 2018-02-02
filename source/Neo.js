@@ -26,14 +26,16 @@ enyo.kind({
 		{kind: "ApplicationEvents", onApplicationRelaunch: "relaunchHandler",
 			onWindowActivated:"windowActivated", onWindowDeactivated:"windowDeactivated", onUnload: "unloaded"},
         
-		{name: "main", kind: "Panels", layoutKind: "FittableColumnsLayout",
-			arrangerKind: "CollapsingArranger", classes: "enyo-fit",
-			narrowFit: false, components: [
-			
-				{name: "sidebar", kind: "Neo.Sidebar", onAccountAdded: "accountAdded",
-					onAccountRemoved: "accountRemoved"},
-				{name: "container", kind: "Neo.Container", 
-					onRefreshAllFinished: "refreshAllFinished", style: "min-width: 350px;"}
+		{name: 'mainBox', components: [
+			{name: "main", kind: "Panels", layoutKind: "FittableColumnsLayout",
+				arrangerKind: "CollapsingArranger", classes: "enyo-fit",
+				narrowFit: false, components: [
+				
+					{name: "sidebar", kind: "Neo.Sidebar", onAccountAdded: "accountAdded",
+						onAccountRemoved: "accountRemoved"},
+					{name: "container", kind: "Neo.Container", 
+						onRefreshAllFinished: "refreshAllFinished", style: "min-width: 350px;"}
+			]}
 		]},
         
 		{name: "imageViewPopup", kind: "Neo.ImageViewPopup", onClose: "closeImageView"},
@@ -506,15 +508,20 @@ copy = function(o) {
 	return n;
 };
 resetApp = function() {
-
 	neoapp.$.main.destroyClientControls();
-	//neoapp.$.main.render();
+	
 	neoapp.$.main.createComponents([
-		{name: "sidebar", kind: "Neo.Sidebar", onAccountAdded: "accountAdded",
-					onAccountRemoved: "accountRemoved"},
-		{name: "container", kind: "Neo.Container", 
-			onRefreshAllFinished: "refreshAllFinished", style: "min-width: 350px;"}
+		{name: "main", kind: "Panels", layoutKind: "FittableColumnsLayout",
+				arrangerKind: "CollapsingArranger", classes: "enyo-fit",
+				narrowFit: false, components: [
+				
+					{name: "sidebar", kind: "Neo.Sidebar", onAccountAdded: "accountAdded",
+						onAccountRemoved: "accountRemoved"},
+					{name: "container", kind: "Neo.Container", 
+						onRefreshAllFinished: "refreshAllFinished", style: "min-width: 350px;"}
+			]}
 	]);
+	
 	neoapp.$.main.render();
 	neoapp.reflow();
 	neoapp.$.cover.hide();

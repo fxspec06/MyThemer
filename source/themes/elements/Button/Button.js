@@ -189,6 +189,7 @@ enyo.kind({
 				textWeight: "0",
 			}
 		},
+		white: {"styles":{"backgroundColor":"rgba(255,255,255,1)","textColor":"rgb(0,0,0)"},"highlight":{}},
 		red: {"styles":{"backgroundColor":"rgb(101,15,15)","textColor":"rgb(240,240,240)","textSize":"24px","textWeight":"400","letterSpacing":"-2px","textTransform":"uppercase","borderWidth":"1px","borderColor":"rgb(140,140,140)","cornerRadius":"5px","border-style":"ridge","index":0},"highlight":{}},
 		
 		onyx: {

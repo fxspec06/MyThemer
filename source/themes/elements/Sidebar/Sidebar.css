@@ -4,6 +4,7 @@
 	
 	margin: 0px;
 	padding: 0px;
+
 }
 
 .neo-sidebar-item {
@@ -23,7 +24,9 @@
 	
 }
 
-
+.neo-sidebar-item {
+	min-width: 175px;
+}
 
 .selected {
 	background-color: #FFF; /* theme setting */

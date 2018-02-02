@@ -512,8 +512,9 @@ enyo.kind({
 				_cmzr.builderColor.setTitle(this.type + ' ' + ((_from == this.getCustomizer().highlight) ? 'highlight ' : '') + _key);
 				_cmzr.builderColor.setType(this.getType());
 				_cmzr.builderColor.setHighlight((_from == this.getCustomizer().highlight));
-				_cmzr.builderColor.setColor(_val);
+				
 				_cmzr.builderColor.setColors(this.colors);
+				_cmzr.builderColor.setColor(_val);
 				_cmzr.builderColor.show();
 
 				break;
@@ -693,6 +694,7 @@ enyo.kind({
 				max = 900;
 				break;
 			case 'width':
+				min = 200;
 			case 'height':
 				max = 500;
 				break;

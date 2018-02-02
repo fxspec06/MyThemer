@@ -221,7 +221,7 @@ enyo.kind({
 				//@* decent match
 					_messages: 'dialog',	// messages | conversation bubbles
 					_pinned: 'anchor',		// when pinned, show the anchor
-					_settings: 'more',		// toolbar more button
+					_settings: 'settings',		// toolbar more button
 					_attach: 'attachment_2',// attach paperclip
 					_shorten: 'link',		// shorten link
 				
