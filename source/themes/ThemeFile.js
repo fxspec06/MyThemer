@@ -632,7 +632,7 @@ enyo.kind({
 		richText: {
 			//@* public
 			defaultTheme: 'neo',
-			themes: ['neo', 'onyx', 'onyx'],
+			themes: ['neo', 'onyx', 'aqua'],
 			//@* protected
 			styles: {
 				backgroundColor: '',

@@ -155,7 +155,7 @@ enyo.kind({
 		this.owner.sample = true;
 		//this.log('SAVING.............', sg.theme.type, window.saving, this.type);
 		if (window.saving[this.getType()] != null) {
-			setTimeout((function(){delete this.owner.sample}).bind(this), 4000, this);
+			setTimeout((function(){delete this.owner.sample}).bind(this), 0, this);
 			return;
 		}
 		window.saving[this.getType()] = true;

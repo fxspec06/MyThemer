@@ -60,16 +60,46 @@ enyo.kind({
 		},
 		aqua: {
 			styles: {
-				/*"backgroundColor":"teal",
+				"backgroundColor":"teal",
 				"textColor":"#CCC",
-				"font-size":"1em",
+				textSize:"1em",
 				"letter-spacing":"",
-				"border-color":"teal"*/
+				"border-color":"white",
+				
+				//width: 200px; min-height: 75px;
+				//text-align: left;
+				
+				borderWidth: "15px",
+				
+				textTransform: "",
+				
+				padding: "", // px
+				margin: "5px", // px
+				
+				width: "500px",
 			},
 			classes: ""
 		},
 		onyx: {
-			styles: {}, highlight: {}
+			styles: {
+				"backgroundColor": "#353839",
+				"textColor":"#00",
+				textSize:"1em",
+				"letter-spacing":"",
+				"border-color":"white",
+				
+				//width: 200px; min-height: 75px;
+				//text-align: left;
+				
+				borderWidth: "15px",
+				
+				textTransform: "",
+				
+				padding: "", // px
+				margin: "5px", // px
+				
+				width: "500px"
+			}, highlight: {}
 		}
 	},
 	create: function(){

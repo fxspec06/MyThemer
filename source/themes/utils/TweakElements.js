@@ -85,7 +85,7 @@ enyo.kind({
 								]},
 								{name: 'builderInput', showing: false, classes: 'compose', components: [
 									{kind: 'onyx.InputDecorator', components: [
-										{name: 'customizeInput', kind: 'onyx.Input', style: 'width: 200px; color: black;',
+										{name: 'customizeInput', kind: 'onyx.Input', classes: 'neo-input',
 											oninput: 'keypress'},
 									]}
 								]}
@@ -210,7 +210,7 @@ enyo.kind({
 		
 		setTimeout(function() {
 			enyo.Signals.send('loadCustom', {theme: copy(_th)});
-		}.bind(this), 0);
+		}.bind(this), 1000);
 		
 		//this.reset();
 	},
@@ -421,17 +421,27 @@ enyo.kind({
 			custom = this.getCustom(),
 			_e = copy(this.element);
 		
+		//console.error(custom, _e);
+
 		if (_ch.name == 'pickerDecorator' && _ch.children[1].showing == true) return;
 		for (var _key in showItems) this.$[showItems[_key]].show();
 		this.$.presetBox.hide();
 		this.preset = this.presets[_i];
 		_t = this.preset.themePreview;
 		//console.error(_t, this.preset, this.themes);
+		/*this.customizer = {
+			master: [],
+			styles: enyo.mixin(_e.styles, copy(this.themes[_t].styles)),
+			highlight: enyo.mixin(_e.highlight, this.themes[_t].highlight)
+		}*/
+
 		this.customizer = {
 			master: [],
 			styles: enyo.mixin(_e.styles, copy(this.themes[_t].styles)),
 			highlight: enyo.mixin(_e.highlight, this.themes[_t].highlight)
 		}
+
+
 		for (var _cmz in this.customizer.styles) this.customizer.master.push(_cmz);
 		for (var _cmz in this.customizer.highlight) this.customizer.master.push('highlight ' + _cmz);
 		if (custom && custom[_t]) {
@@ -466,6 +476,8 @@ enyo.kind({
 			_from = this.customizer.styles,
 			customize;
 		
+		//console.error(this.customizer);
+
 		if (typeof _key === undefined) return;
 		
 		if (_key.indexOf('highlight') != -1) {
@@ -483,7 +495,7 @@ enyo.kind({
 		_cmzr.inputDecorator.show();
 		// set our preset builder up
 		
-		//this.log(_key, _val, _from)
+		console.error(_key, _val, _from);
 		switch (presetType) {
 			case 'Size':
 				// also here, we want to set the min and the max for the slider
@@ -513,6 +525,7 @@ enyo.kind({
 				_cmzr.builderColor.setType(this.getType());
 				_cmzr.builderColor.setHighlight((_from == this.getCustomizer().highlight));
 				
+
 				_cmzr.builderColor.setColors(this.colors);
 				_cmzr.builderColor.setColor(_val);
 				_cmzr.builderColor.show();
