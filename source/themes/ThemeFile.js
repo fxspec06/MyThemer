@@ -35,9 +35,30 @@ enyo.kind({
 	create: function() {
 		this.inherited(arguments);
 		this.createComponent({kind: 'Signals', loadTheme: 'signalLoad', saveTheme: 'saveTheme', saveQuickTheme: 'saveQuickTheme',
-			loadCustom: 'loadCustom', saveToThemesList: 'saveToThemesList', deleteTheme: 'deleteTheme'},
+			loadCustom: 'loadCustom', saveToThemesList: 'saveToThemesList', deleteTheme: 'deleteTheme', loadThemeFromManager: 'loadThemeFromManager'},
 			{owner: this});
 		this.owner.loadTheme = this.loadTheme.bind(this);
+	},
+
+	loadThemeFromManager: function(s, theme) {
+		this.setTheme(theme.theme);
+		this.loadCustom(theme.theme);
+		return;
+
+		
+		var _t = this.theme,
+			_l = this.getDefaults(),
+			_c = this.getCustom();
+		if (_c[_t]) enyo.mixin(_l, _c[_t]);
+			else enyo.mixin(_l, this._load());
+		//this.log(copy(_l), _t);
+
+		this.loadDefaults();
+
+
+		this.setHighlight(_l.highlight);
+		this.setStyles(_l.styles);
+		this.bubble('onUpdate', _l.styles || _l);
 	},
 	
 	//@* published
@@ -232,8 +253,7 @@ enyo.kind({
 			
 
 			//enyo.Signals.send('loadTheme', {type: this.getType(), theme: 'saved'});
-			/*App.Prefs.set("wasTheming", true);
-			location.reload();*/
+			App.Prefs.set("wasTheming", true);
 			resetApp();
 		}
 	},

@@ -8,6 +8,7 @@ enyo.depends(
 	"elements",
 	"utils/TweakElements.js",
 	"utils/basic.js",
+	'utils/ThemeManager.js',
 	
 // 
 	"builders",

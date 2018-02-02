@@ -207,7 +207,11 @@ enyo.kind({
 		var _th = this.getPrepared();
 		this.spinner(true);
 		neoapp.$.cover.show();
-		enyo.Signals.send('loadCustom', {theme: copy(_th)});
+		
+		setTimeout(function() {
+			enyo.Signals.send('loadCustom', {theme: copy(_th)});
+		}.bind(this), 0);
+		
 		//this.reset();
 	},
 	//@* event

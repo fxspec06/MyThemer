@@ -80,7 +80,9 @@ enyo.kind({
 		{name: 'tweakElements', kind: 'Neo.TweakElements', fit: true, layoutKind: 'FittableRowsLayout'},
 	],
 	
-	
+	themeManager: [
+		{name: 'themeManager', kind: 'Neo.ThemeManager', fit: true, layoutKind: 'FittableRowsLayout'}
+	],
 	
 	//@* override
 	create: function() {

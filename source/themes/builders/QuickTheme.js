@@ -293,7 +293,7 @@ enyo.kind({
 			setTimeout((function(type, params){
 				this.log('loading...', type, params);
 				enyo.Signals.send('saveQuickTheme', enyo.clone(params));
-			}).bind(this), 1000 * i, type, params);
+			}).bind(this), /*100*/0 * i, type, params);
 			i++;
 		}
 		this.log('SUCCESS!!!!!!!!!!!!!!!');
@@ -362,7 +362,7 @@ enyo.kind({
 		this.quickTheme(colors);
 		this.spinner(true);
 		neoapp.$.cover.show();
-		setTimeout(this.finish.bind(this), 7500); // 10 second delay to load
+		setTimeout(this.finish.bind(this), 0); // 10 second delay to load
 	},
     spinner: function(onoff) {
     	//this.log(onoff ? 'showing' : 'hiding');
@@ -375,7 +375,7 @@ enyo.kind({
     finish: function() {
     	window.saving = {};
 	//this.spinner(false);
-
+	
 	resetApp();
 
     	//this.exit();
