@@ -55,11 +55,17 @@ enyo.kind({
 		},
 		aqua: {
 			styles: {
-				/*'backgroundColor':'teal',
-				'textColor':'#CCC',
-				'font-size':'1em',
-				'letter-spacing':'',
-				'border-color':'teal'*/
+				backgroundColor: 'teal',
+				textColor: 'rgb(240,240,240)',
+				textSize: '24px',
+				textWeight: '400',
+				letterSpacing:'-5px',
+				textTransform: 'lowercase',
+				borderWidth: '2px',
+				borderColor: 'rgb(255,255,255)',
+				cornerRadius: '20px',
+				margin: '',
+				padding: ''
 			},
 			classes: ''
 		},

@@ -51,6 +51,75 @@ enyo.kind({
 			},
 			classes: ""
 		},
+/*
+
+
+		aqua: {
+			styles: {
+				backgroundColor: 'teal',
+				textColor: 'rgb(240,240,240)',
+				textSize: '24px',
+				textWeight: '400',
+				letterSpacing:'-5px',
+				textTransform: 'lowercase',
+				borderWidth: '2px',
+				borderColor: 'rgb(255,255,255)',
+				cornerRadius: '20px',
+			},
+			classes: ''
+		},
+*/
+		aqua: {
+			theme: [
+				{tag: "table", attributes: {width: "100%"}, components: [
+					{tag: "tr", components: [
+						{tag: "td", attributes: {rowspan: "2", width: "70px"}, components: [
+							{name: "avatar", kind: "Neo.Avatar"}
+						]},
+						{tag: "td", attributes: {width: "100%"}, components: [
+							{name: "header", kind: "Neo.Header"}
+					]}]},
+					{tag: "tr", components: [
+						{tag: "td", components: [
+							{name: "body", kind:"Neo.Body"},
+							{name: "timestamp", kind: "Neo.Timestamp"}
+					]}]},
+					{tag: "tr", components: [
+						{tag: "td", attributes: {colspan: "2"}, components: [
+							{name: "retweet", kind: "Neo.RetweetInfo", showing: false},
+					]}]}
+			]}],
+			styles: {
+				backgroundColor:"teal",
+				textColor:"rgb(240,240,240)",
+				textSize: "24px",
+				textWeight: "400",
+				layout: "neo",
+				letterSpacing:"-5px",
+				textTransform: "",
+				
+				borderLeftSize: "2px",
+				borderRightSize: "2px",
+				borderLeftColor: "rgb(240,240,240)",
+				borderRightColor: "rgb(240,240,240)",
+				borderTopSize: "0px",
+				borderBottomSize: "0px",
+				borderTopColor: "",
+				borderBottomColor: "",
+			},
+			// we use this to CHEAT..
+			highlight: {
+				textColor: "", // color
+				textSize: "20px", // em
+				textWeight: "400",
+				letterSpacing:"-1px",
+				textTransform: "",
+			},
+			classes: ""
+		},
+
+
+
 		official: {
 			theme: [
 				{tag: "table", attributes: {width: "100%"}, components: [

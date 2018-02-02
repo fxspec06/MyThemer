@@ -98,7 +98,7 @@ enyo.kind({
 
 		var _i = e.index;
 		var theme = this.defaultThemes[_i];
-		enyo.Signals.send('loadCustom', {type: 'override', theme: 'neo'});
+		enyo.Signals.send('loadThemeFromManager', {theme: theme});
 		setTimeout(function(){
 			resetApp();
 		}.bind(this), 0);

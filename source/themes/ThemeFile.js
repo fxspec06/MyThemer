@@ -39,26 +39,48 @@ enyo.kind({
 			{owner: this});
 		this.owner.loadTheme = this.loadTheme.bind(this);
 	},
-
+	findOwner: function() {
+		var owner = this.owner;
+		console.error(owner, owner.themes, owner.owner, owner.owner.themes);
+		return (owner.themes?owner:owner.owner);
+	},
 	loadThemeFromManager: function(s, theme) {
-		this.setTheme(theme.theme);
-		this.loadCustom(theme.theme);
-		return;
 
+		console.error('TRYING TO LOAD ', this.type, theme, ' FROM THEME MANAGER...');
 		
-		var _t = this.theme,
-			_l = this.getDefaults(),
-			_c = this.getCustom();
-		if (_c[_t]) enyo.mixin(_l, _c[_t]);
-			else enyo.mixin(_l, this._load());
-		//this.log(copy(_l), _t);
+		var owner = this.findOwner();
 
-		this.loadDefaults();
+		if (!this.validate(theme.theme) || !owner.themes[theme.theme]) return console.error('NO THEME FOUND...');
+			else console.error(theme.theme + ' found...');
 
+		var sg = {
+			theme: {
+				name: theme.theme,
+				type: this.type,
+				styles: owner.themes[theme.theme].styles,
+				highlight: owner.themes[theme.theme].highlight,
+				override: true
+			}
+		}
 
-		this.setHighlight(_l.highlight);
-		this.setStyles(_l.styles);
-		this.bubble('onUpdate', _l.styles || _l);
+		//this.log(this, this.type, sg.theme.type);
+		if (!this.getType() || this.getType() == null) this.log(this, this.getType(), s, sg);
+		if (this.getType() != sg.theme.type) return;
+		owner.sample = true;
+		//this.log('SAVING.............', sg.theme.type, window.saving, this.type);
+
+		var c = this.getCustom(),
+			_cstm = enyo.clone({name: sg.theme.name, styles: sg.theme.styles, highlight: sg.theme.highlight});
+		//this.log('SAVING QUICK THEME.............');
+		this.theme = _cstm.name;
+		this.stripNull(_cstm.styles);
+		this.stripNull(_cstm.highlight);
+		this.setStyles(/*enyo.mixin(this.getDefaults().styles, */_cstm.styles/*)*/);
+		this.setHighlight(/*enyo.mixin(this.getDefaults().highlight, */_cstm.highlight/*)*/);
+		this.saveTheme();
+		this.saveCustom(_cstm);
+
+		resetApp();
 	},
 	
 	//@* published
@@ -514,7 +536,7 @@ enyo.kind({
 		toolbar: {
 			//@* public
 			defaultTheme: 'kakhi',
-			themes: ['neo', 'kakhi', 'white', 'onyx', 'red', 'steel', 'blue', 'green', 'forest', 'bruins'],
+			themes: ['neo', 'aqua', 'kakhi', 'white', 'onyx', 'red', 'steel', 'blue', 'green', 'forest', 'bruins'],
 			//@* protected
 			styles: {
 				backgroundColor: '',
@@ -580,7 +602,7 @@ enyo.kind({
 		tweet: {
 			//@* public
 			defaultTheme: 'blue',
-			themes: ['neo', 'official', 'officialCondensed', 'blue', 'onyx', 'red and yellow'],
+			themes: ['neo', 'aqua', 'official', 'officialCondensed', 'blue', 'onyx', 'red and yellow'],
 			//@* protected
 			styles: {
 				layout: '',
