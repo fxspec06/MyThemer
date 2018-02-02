@@ -78,7 +78,7 @@ enyo.kind({
 		this.setStyles(/*enyo.mixin(this.getDefaults().styles, */_cstm.styles/*)*/);
 		this.setHighlight(/*enyo.mixin(this.getDefaults().highlight, */_cstm.highlight/*)*/);
 		this.saveTheme();
-		this.saveCustom(_cstm);
+		//this.saveCustom(_cstm);
 
 		resetApp();
 	},
@@ -348,8 +348,8 @@ enyo.kind({
 			//@* convert key to CSS
 				_key = this.toCSS(_key);
 			//@* load the style
-				if (_key != '') _ctx.applyStyle(_key, _val);
-					else _ctx.applyStyle(_key, null);
+				if (_key != '' || _key != null) _ctx.applyStyle(_key, _val);
+					else _ctx.applyStyle(_key, inherit);
 		}
 	},
 	
@@ -511,8 +511,8 @@ enyo.kind({
 	// elements
 		button: {
 			//@* public
-			defaultTheme: 'blue',
-			themes: ['neo', 'aqua', 'blue', 'white', 'red', 'onyx'],
+			defaultTheme: 'neo_alternate',
+			themes: ['neo', 'aqua', 'neo_alternate', 'white', 'red', 'onyx'],
 			
 			//@* protected
 			styles: {
@@ -535,8 +535,8 @@ enyo.kind({
 		},
 		toolbar: {
 			//@* public
-			defaultTheme: 'kakhi',
-			themes: ['neo', 'aqua', 'kakhi', 'white', 'onyx', 'red', 'steel', 'blue', 'green', 'forest', 'bruins'],
+			defaultTheme: 'neo_alternate',
+			themes: ['neo', 'aqua', 'neo_alternate', 'white', 'onyx', 'red', 'steel', 'blue', 'green', 'forest', 'bruins'],
 			//@* protected
 			styles: {
 				backgroundColor: '',
@@ -562,8 +562,8 @@ enyo.kind({
 		},
 		sidebarItem: {
 			//@* public
-			defaultTheme: 'murky',
-			themes: ['neo', 'aqua', 'murky', 'white', 'Large', 'green', 'onyx'],
+			defaultTheme: 'neo_alternate',
+			themes: ['neo', 'aqua', 'neo_alternate', 'white', 'Large', 'green', 'onyx'],
 			//@* protected
 			styles: {
 				width: '',
@@ -601,8 +601,8 @@ enyo.kind({
 		},
 		tweet: {
 			//@* public
-			defaultTheme: 'blue',
-			themes: ['neo', 'aqua', 'official', 'officialCondensed', 'blue', 'onyx', 'red and yellow'],
+			defaultTheme: 'neo_alternate',
+			themes: ['neo', 'aqua', 'neo_alternate', 'white', 'official', 'officialCondensed', 'onyx', 'red and yellow'],
 			//@* protected
 			styles: {
 				layout: '',
@@ -634,8 +634,8 @@ enyo.kind({
 		},
 		popupList: {
 			//@* public
-			defaultTheme: 'cloudy',
-			themes: ['neo', 'white', 'cloudy', 'onyx'],
+			defaultTheme: 'neo_alternate',
+			themes: ['neo', 'white', 'neo_alternate', 'onyx'],
 			//@* protected
 			styles: {
 				backgroundColor: '',
@@ -653,8 +653,8 @@ enyo.kind({
 		},
 		richText: {
 			//@* public
-			defaultTheme: 'neo',
-			themes: ['neo', 'onyx', 'aqua'],
+			defaultTheme: 'neo_alternate',
+			themes: ['neo', 'onyx', 'aqua', 'white', 'neo_alternate'],
 			//@* protected
 			styles: {
 				backgroundColor: '',

@@ -10,7 +10,7 @@ enyo.kind({
 	},
 
 	published: {
-		defaultThemes: ['neo', 'aqua']
+		defaultThemes: ['neo', 'aqua', 'neo_alternate', 'white']
 	},
 	
 	components: [
@@ -21,12 +21,12 @@ enyo.kind({
 				{name: 'caption', classes: 'neo-themes-caption', content: 'Change everything. Again.'}
 			]},
 			
-			{name: 'spinner', kind: 'Neo.Spinner', showing: false},
+			{name: 'spinner', kind: 'Neo.Spinner', showing: false, fit: true},
 
 
 			//{content: 'Customize your theme', classes: 'onyx-groupbox-header'},
 			//{name: 'livePreview', saveable: true, style: 'margin:auto;'},
-			{kind: 'Scroller', fit: true, touch: true, thumb: false, components: [
+			{name: 'scroll', kind: 'Scroller', fit: true, touch: true, thumb: false, components: [
 				{content: 'Default Themes', classes: 'onyx-groupbox-header'},
 				/*{style: 'max-width: 300px; text-align: center; margin: auto;', classes: 'compose onyx-groupbox', components: [
 					{kind: 'onyx.InputDecorator', components: [
@@ -71,7 +71,7 @@ enyo.kind({
 			btn = e.item.$.button;
 		
 		btn.setText(this.defaultThemes[_i]);
-		btn.$.themer.setTheme(this.defaultThemes[_i]);
+		btn.$.themer.preview(this.defaultThemes[_i]);
 	},
 
 
@@ -85,7 +85,9 @@ enyo.kind({
      spinner: function(onoff) {
           this.log(onoff ? 'showing' : 'hiding');
           //this.$.spinner[onoff ? 'start' : 'stop']();
-          this.$.spinner.setShowing(onoff);
+		
+	     this.$.scroll.setShowing(!onoff);
+		this.$.spinner.setShowing(onoff);
           this.reflow();
           this.render();
     },
@@ -95,10 +97,17 @@ enyo.kind({
 
     loadTheme: function(s, e) {
 		this.spinner(true);
+		neoapp.$.cover.show();
 
 		var _i = e.index;
 		var theme = this.defaultThemes[_i];
-		enyo.Signals.send('loadThemeFromManager', {theme: theme});
+		
+
+		
+		setTimeout(function(){
+			enyo.Signals.send('loadThemeFromManager', {theme: theme});
+		}.bind(this), 0);
+
 		setTimeout(function(){
 			resetApp();
 		}.bind(this), 0);

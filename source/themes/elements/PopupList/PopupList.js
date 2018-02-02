@@ -57,7 +57,7 @@ enyo.kind({
 			},
 			classes: ""*/
 		},
-		cloudy: {
+		neo_alternate: {
 			styles: {
 				backgroundColor: "rgb(79,96,74)",
 				borderColor: "rgb(189, 183, 107)",

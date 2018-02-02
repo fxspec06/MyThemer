@@ -109,7 +109,7 @@ enyo.kind({
 			toBG = this.$.container.$.timeline.children[0].$.item.$.themer.styles.backgroundColor;
 			var containerBG = this.darkLight(toBG);
 			this.$.container.applyStyle('background-color',  containerBG);
-		}.bind(this), 1000)
+		}.bind(this), 1000);
 	},
 	darkLight: function(color) {
 		//setTimeout(function(){
@@ -525,6 +525,19 @@ resetApp = function() {
 	neoapp.$.main.render();
 	neoapp.reflow();
 	neoapp.$.cover.hide();
+
+	/*setTimeout(function() {
+		var toBG = neoapp.$.sidebar.$.list.children[0].$.item.$.themer.styles.backgroundColor;
+		//console.error(toBG);
+		var sidebarBG = neoapp.darkLight(toBG);
+		neoapp.$.sidebar.applyStyle('background-color', sidebarBG);
+		
+		//console.error(neoapp.$.container.$.timeline.children[0].$.item.$.themer);
+		toBG = neoapp.$.container.$.timeline.children[0].$.item.$.themer.styles.backgroundColor;
+		var containerBG = neoapp.darkLight(toBG);
+		neoapp.$.container.applyStyle('background-color',  containerBG);
+	}.bind(this), 1000);*/
+
 	if (App.Prefs.get("wasTheming")) {
 		AppUI.showMore("themes");
 		App.Prefs.set("wasTheming", false);

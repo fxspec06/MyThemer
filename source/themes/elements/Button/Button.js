@@ -176,7 +176,7 @@ enyo.kind({
 			},
 			classes: ''
 		},
-		blue: {
+		neo_alternate: {
 			styles: {
 				backgroundColor: "rgb(26,47,58)",
 				borderColor: "rgb(255,255,255)",

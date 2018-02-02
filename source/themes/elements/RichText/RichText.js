@@ -54,7 +54,7 @@ enyo.kind({
 				padding: "", // px
 				margin: "5px", // px
 				
-				width: "500px",
+				width: "250px",
 			},
 			classes: ""
 		},
@@ -76,7 +76,7 @@ enyo.kind({
 				padding: "", // px
 				margin: "5px", // px
 				
-				width: "500px",
+				width: "250px",
 			},
 			classes: ""
 		},
@@ -98,9 +98,51 @@ enyo.kind({
 				padding: "", // px
 				margin: "5px", // px
 				
-				width: "500px"
+				width: "250px"
 			}, highlight: {}
-		}
+		},
+		neo_alternate: {
+			styles: {
+				"backgroundColor": "rgb(14,44,58)",
+				"textColor":"rgb(189, 183, 107)",
+				textSize:"1em",
+				"letter-spacing":"-2px",
+				"border-color":"rgb(184, 134, 11)",
+				
+				//width: 200px; min-height: 75px;
+				//text-align: left;
+				
+				borderWidth: "15px",
+				
+				textTransform: "",
+				
+				padding: "", // px
+				margin: "5px", // px
+				
+				width: "250px"
+			}, highlight: {}
+		},
+		white: {
+			styles: {
+				"backgroundColor": "rgb(255, 255, 255)",
+				"textColor":"rgb(0,0,0)",
+				textSize:"1em",
+				"letter-spacing":"-2px",
+				"border-color":"rgb(0, 0, 0)",
+				
+				//width: 200px; min-height: 75px;
+				//text-align: left;
+				
+				borderWidth: "15px",
+				
+				textTransform: "",
+				
+				padding: "", // px
+				margin: "5px", // px
+				
+				width: "250px"
+			}, highlight: {}
+		},
 	},
 	create: function(){
 		this.inherited(arguments);

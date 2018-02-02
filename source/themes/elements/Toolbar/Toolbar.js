@@ -71,7 +71,7 @@ enyo.kind({
 		},
 		white: {"styles":{"backgroundColor":"rgba(255,  255,  255, 1)","textColor":"rgba(79,  112,  79, 1)","textSize":"","textWeight":"","letterSpacing":"","textTransform":"","margin":"","padding":""},"highlight":{}},
 		
-		kakhi: {
+		neo_alternate: {
 			styles: {
 				backgroundColor: "rgb(85,88,35)",
 				letterSpacing: "-2px",
